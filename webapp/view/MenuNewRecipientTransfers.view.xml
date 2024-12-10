@@ -1,0 +1,111 @@
+<mvc:View controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewRecipientTransfers"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    >
+     <!--Primer Caja de Texto-->
+    <HBox id="hboxord1"
+     alignItems="Center"
+    justifyContent="Start"
+     >
+    
+		<Label required="true" id="labelord1" class="sapUiMediumMarginBegin sapUiTinyMarginEnd"  text="Recipient Name: " labelFor="inputField" />
+		<Input id="input-ord1" required="true" liveChange="onInputChange" width="250%" />
+	
+    </HBox>
+    <!--Fin Primer Caja de Texto-->
+    <HBox id="hboxord2"
+     alignItems="Center"
+    justifyContent="Start"
+     >
+    
+		<Label required="true" id="labelord2" class="sapUiMediumMarginBegin sapUiTinyMarginEnd"  text="Recipient Account: " labelFor="inputField" />
+		<Input id="input-ord2" required="true" liveChange="onInputChange" width="244%" />
+	
+    </HBox>
+    <!--Fin Selection_1-->
+     <HBox id="hboxord3"
+     alignItems="Center"
+    justifyContent="Start"
+     >
+    
+		<Label required="true" id="labelord3" class="sapUiMediumMarginBegin sapUiTinyMarginEnd"  text="Recipient Address: " labelFor="inputField" />
+		<Input id="input-ord3" required="true" liveChange="onInputChange" width="244%" />
+	
+    </HBox>
+    <!--Selection_2-->
+     <HBox id="hboxord4"
+    alignItems="Center"
+    justifyContent="Start">
+    
+		<Label  class="sapUiMediumMarginBegin sapUiTinyMarginEnd" required="false" id="labelord4" text="Bank BIC:" labelFor="productInput" />
+		<Input
+			id="productInputord1"
+			showSuggestion="true"
+			showValueHelp="true"
+			valueHelpRequest=".onValueHelpRequest"
+			suggestionItems="{/ProductCollection}"
+            width="240%">
+			<suggestionItems>
+				<core:Item id="nameord1" text="{Name}" />
+			</suggestionItems>
+		</Input>
+	
+    </HBox>
+    <!--Fin Selection_2-->
+      <HBox id="hboxord5"
+    alignItems="Center"
+    justifyContent="Start">
+    
+		<Label  class="sapUiMediumMarginBegin sapUiTinyMarginEnd" required="false" id="labelord5" text="Beneficiary country:" labelFor="productInput" />
+		<Input
+			id="productInputord2"
+			showSuggestion="true"
+			showValueHelp="true"
+			valueHelpRequest=".onValueHelpRequest"
+			suggestionItems="{/ProductCollection}"
+            width="211%">
+			<suggestionItems>
+				<core:Item id="nameord2" text="{Name}" />
+			</suggestionItems>
+		</Input>
+	
+    </HBox>
+     <!--segunda Caja de Texto-->
+   <!---->
+  <HBox id="hboxord6"
+     alignItems="Center"
+    justifyContent="Start"
+     >
+    
+		<Label id="labelord6" class="sapUiMediumMarginBegin sapUiTinyMarginEnd"  text="Bank Name: " labelFor="inputField" />
+		<Input id="input-ord4" required="false" liveChange="onInputChange" width="273%" />
+	
+    </HBox>
+<!---->
+<!---->
+<HBox id="hboxord7"
+     alignItems="Center"
+    justifyContent="Start"
+     >
+    
+		<Label id="labelord7" class="sapUiMediumMarginBegin sapUiTinyMarginEnd"  text="Bank Address: " labelFor="inputField" />
+		<Input id="input-ord5" required="false" liveChange="onInputChange" width="265%" />
+	
+    </HBox>
+
+<!---->
+<!---->
+<HBox id="hboxord8"
+     alignItems="Center"
+    justifyContent="Start"
+     >
+    
+		<Label id="labelord8" class="sapUiMediumMarginBegin sapUiTinyMarginEnd"  text="Bank Account: " labelFor="inputField" />
+		<Input id="input-ord6" required="false" liveChange="onInputChange" width="265%" />
+	
+    </HBox>
+
+    </mvc:View>

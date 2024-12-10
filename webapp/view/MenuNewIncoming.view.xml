@@ -1,0 +1,218 @@
+<!--
+Swift incoming 103
+-->
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.uxap"
+xmlns:core="sap.ui.core"
+xmlns:m="sap.m"
+xmlns:f="sap.f"
+xmlns:fb="sap.ui.comp.filterbar"
+xmlns:sf="sap.ui.comp.smartfield"
+xmlns:form="sap.ui.layout.form"
+xmlns:l="sap.ui.layout"
+xmlns:semantic="sap.m.semantic"
+controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewOrderingTransfers">
+	<ObjectPageLayout id="ObjectPageLayout2" showTitleInHeaderContent="false" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="false" isChildPage="true" upperCaseAnchorBar="false" busy="{detailView>/busy}">
+				<headerTitle>
+					 <ObjectPageHeader id="header" objectTitle="{detailView>/objectTypeName}" isObjectIconAlwaysVisible="false" isObjectTitleAlwaysVisible="true" isObjectSubtitleAlwaysVisible="false">
+						<actions>					
+							<ObjectPageHeaderActionButton id="btnSave1" hideText="false" text="{i18n>btn.save}" icon="sap-icon://complete" press="handleSave"/>
+							<ObjectPageHeaderActionButton id="header2" hideIcon="true" hideText="false" text="{i18n>btn.cancel}" press="handleCancel"/>
+						</actions>
+		
+					</ObjectPageHeader>
+				</headerTitle>
+				
+		<sections>
+			<ObjectPageSection id="section3" title="{i18n>xtit.generalInfo}">
+				<subSections>
+					<ObjectPageSubSection id="section4">
+						<blocks>
+							<m:VBox id="vbox4" class="sapUiSmallMargin">
+							 <form:SimpleForm id="recipientForm2" 
+                             editable="true"
+                              layout="ResponsiveGridLayout" 
+                             labelSpanXL="3" 
+                             labelSpanL="3"
+                              labelSpanM="3"
+                              adjustLabelSpan="false"
+                               emptySpanXL="4" 
+                              emptySpanL="4"
+                               emptySpanM="4" emptySpanS="0" 
+                              columnsXL="1" 
+                             columnsL="1" columnsM="1" singleContainerFullSize="false">
+								 <form:content>				
+									<!-- Reference -->
+									<m:Label id="transactionReferenceLabel2" text="{i18n>lbl.transactionReference}" required="true"/>
+									<m:Input id="transactionReferenceInput2" type="Text" change="onInputChange" />
+									<!-- Account -->
+									<m:Label id="accountIdLabel2" text="{i18n>lbl.recipientAccountId2}" required="true"/>
+									<m:Input id="accountIdInput2" type="Text" change="onInputChange"/>
+									<!-- Name -->
+									<m:Label id="orderNameLabel" text="{i18n>lbl.orderName2}" required="true"/>
+									<m:Input id="orderNameInput" type="Text"/>
+									<!-- Address -->
+									<m:Label id="orderAddressLabel2" text="{i18n>lbl.orderAddress2}" required="true"/>
+									<m:Input id="orderAddressInput2" type="Text"/>
+									<!-- Institution Bank Name -->
+									<m:Label id="orderBankNameLabel" text="{i18n>lbl.BankName2}" required="true"/>
+									<m:Input id="orderBankNameInput" type="Text" />
+									<!--BankBic-->
+									<m:Label id="Labelorderbic" text="{i18n>lbl.intermediaryBankInput2}"/>
+									<!--
+									<sf:SmartLabel labelFor="orderBic" text="{i18n>lbl.intermediaryBankInput2}"/>
+									-->
+									<sf:SmartField id="orderBic" value="{RecipientBankKey}"/>
+									<!-- Origin Country&nbsp;
+									<m:Label id="origCountyLabel" text="{i18n>lbl.origCounty}" required="false"/>
+									<m:ComboBox id="origCountyInput" items="{/PaicesSet}">
+										<core:Item text="{landx}" key="{land1}"/>
+									</m:ComboBox>
+									-->
+									<m:Label id="fxorigCountyLabel" text="{i18n>lbl.origCounty}" required="false"/>
+									<m:Input id="fxorigCountyInput" value="{land1}" showValueHelp="true" valueHelpRequest="handleCountyValueHelp"/>
+									
+									<!--
+									<m:Input id="origCountyInput" type="Text" suggestionItems="{/Paices}">
+									-->
+									<!-- Bank Address -->
+									<m:Label id="orderBankAddressLabel" text="{i18n>lbl.BankAddress2}" required="true"/>
+									<m:Input id="orderBankAddressInput" type="Text"/>
+									<!--Transfer amount -->
+									<m:Label id="amountLabel2" text="{i18n>lbl.partnerAmount}" required="true"/>
+									<m:Input id="amountInput2"
+										change="onNumberChange"
+										type="Number"
+										textAlign="Right"						
+										valueStateText="{i18n>ymsg.errorAmount}"/>
+									<!-- Currency -->
+									<m:ComboBox   id="currencyBox1"
+                                     items="{       
+                                     path: '/CurrencySet', 
+                                     filters: [{    
+                                     path: 'TransactionTypeCode',                       
+                                     operator: 'BT',                       
+                                     value1: '07'           
+                                        }]           
+                                         }" 
+                                    valueStateText="{i18n>ymsg.errorCurrency}" 
+                                    required="true">
+										<core:Item id="currencyItem1" key="{Id}" text="{Name}"/>
+									</m:ComboBox>
+									<!-- CBB -->
+									<m:Label id="fxItemTypeLabel" text="{i18n>lbl.itemTypeCode}" required="true"/>
+									<m:Input id="fxItemTypeCodeInput" value="{TypeCode}" showValueHelp="true" valueHelpRequest="handleItemTypeValueHelp"/>
+									
+								</form:content>
+							  </form:SimpleForm>
+				       		 </m:VBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection id="section5" title="{i18n>xtit.benefInfo}">
+				<subSections>
+					<ObjectPageSubSection id="subsection">
+					  <blocks>
+						<m:VBox id="vbox6" class="sapUiSmallMargin">
+							<form:SimpleForm id="generalInformationForm1"
+                             editable="true" 
+                             layout="ResponsiveGridLayout" 
+                             labelSpanXL="3" 
+                             labelSpanL="3" 
+                             labelSpanM="3" 
+                             adjustLabelSpan="false" 
+                             emptySpanXL="4" 
+                             emptySpanL="4" 
+                             emptySpanM="4" 
+                             emptySpanS="0" 
+                             columnsXL="1" 
+                             columnsL="1" 
+                             columnsM="1" 
+                             singleContainerFullSize="false">
+						<form:content>	
+							
+							<!-- Business Partner Num. and Name-->
+							<m:Label id="partnerIdLabel1" text="{i18n>lbl.partnerIdNumber}" required="true"/>
+							<m:Input id="partnerIdInput1" type="Text" change="onInputChange" showValueHelp="true" valueHelpRequest="_handlePartnerValueHelp" valueStateText="{i18n>ymsg.errorPartner}" maxLength="10"/>
+							<m:Text id="partnerNameInput1" text="{PartnerName}"/>
+							<!-- Cuenta-->
+							<m:Label id="partnerAccountIdLabel" text="{i18n>lbl.partnerAccount}" required="true"/>
+							<m:Input id="partnerAccountIdInput"
+								type="Text"
+								change="onInputChange"
+								value="{/AccountSet}"
+								showValueHelp="true"
+								valueHelpRequest="_handleAccountValueHelp"
+								valueStateText="{i18n>ymsg.errorAccount}"
+								maxLength="34"/>
+							<!-- Address -->
+							<m:Label id="partnerAddressLabel" text="{i18n>lbl.orderAddress}" required="true"/>
+							<m:Input id="partnerAddressInput" type="Text"/>
+							
+							</form:content>
+					    </form:SimpleForm>	
+						</m:VBox>                                	
+    				  </blocks>
+					</ObjectPageSubSection>					
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection id="section6" title="{i18n>xtit.controlInfo}">
+				<subSections>
+					<ObjectPageSubSection id="subsection4">
+					  <blocks>
+						<m:VBox id="vbox7" class="sapUiSmallMargin">
+							<form:SimpleForm id="controlForm1" 
+                            editable="true" 
+                            layout="ResponsiveGridLayout" 
+                            labelSpanXL="3" 
+                            labelSpanL="3" 
+                            labelSpanM="3" 
+                            adjustLabelSpan="false" 
+                            emptySpanXL="4" 
+                            emptySpanL="4" 
+                            emptySpanM="4"
+                             emptySpanS="0" 
+                             columnsXL="1" 
+                             columnsL="1" 
+                             columnsM="1" 
+                             singleContainerFullSize="false">
+						<form:content>	
+
+							
+							<m:Label id="symCuentaLabel" text="{i18n>lbl.clearingAggrement}" required="true"/>
+							<m:ComboBox id="symCuentaBox" items="{/SymCuentaSet}">
+							<core:Item id="coreitem" text="{Name}" key="{Id}"/>
+							</m:ComboBox>
+						    <!--
+						    <m:CheckBox id="invEsp" text="{i18n>lbl.invEsp}" selected="false" enabled="true"/>
+						    -->
+						    <!--BankBic combo-->
+							<m:Label id="smart2" labelFor="intermediaryBankInput" text="{i18n>lbl.intermediaryBankInput}"/>
+							<sf:SmartField id="intermediaryBankInput1" value="{IntermediaryBankKey}"/>
+							
+							<!--Intermediary ABA/Routing Account-->
+							<m:Label id="instituteNameLabel1" text="{i18n>lbl.instituteNameLabel}"/>
+							<m:Input id="instituteNameInput1" type="Text" />
+							<!--Intermediary Address-->
+							<m:Label id="instituteAddr1Label1" text="{i18n>lbl.instituteAddr1Label}"/>
+							<m:Input id="instituteAddr1Input1" type="Text" />	
+							<!--Addenda Information-->
+							<m:Label id="descriptionLabel1" text="{i18n>lbl.description}" required="true"/>
+							<m:Input id="descriptionInput1" />
+							<!--Instruction REC
+							<m:Label id="description4Label" text="{i18n>lbl.description4}"/>
+							<m:Input id="description4Input" />-->
+							
+						</form:content>
+					    </form:SimpleForm>	
+						</m:VBox>                                	
+    				  </blocks>
+					</ObjectPageSubSection>					
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>	
+
+</mvc:View>

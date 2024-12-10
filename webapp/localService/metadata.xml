@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="BAPE.PAYMENT_TRANSACTION_FREE_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="FreeMessageRequest" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="Uuid"/>
+                    <PropertyRef Name="ContentTypeCode"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uuid" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SenderBusinessSystemId" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Sender" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecipientBusinessSystemId" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Recipient" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ContentTypeCode" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Type Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ContentText" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Context Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="FreeMessageResponse" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="Uuid"/>
+                    <PropertyRef Name="IdObject"/>
+                    <PropertyRef Name="ContentTypeCode"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uuid" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SenderBusinessSystemId" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Sender" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecipientBusinessSystemId" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Recipient" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IdObject" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="ID Object" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatusCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Status Cod" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatusName" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Status Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ContentTypeCode" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Type Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ContentText" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Context Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="BAPE_PAYMENT_TRANSACTION_FREE_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="FreeMessageRequestSet" EntityType="BAPE.PAYMENT_TRANSACTION_FREE_SRV.FreeMessageRequest" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="FreeMessageResponseSet" EntityType="BAPE.PAYMENT_TRANSACTION_FREE_SRV.FreeMessageResponse" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="https://pydevbz.bancatlan.hn:44300/sap/opu/odata/bape/PAYMENT_TRANSACTION_FREE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://pydevbz.bancatlan.hn:44300/sap/opu/odata/bape/PAYMENT_TRANSACTION_FREE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

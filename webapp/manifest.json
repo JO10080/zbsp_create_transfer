@@ -1,0 +1,243 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "zbsp.bz.zbspcreatetransfer",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.15.3",
+      "toolsId": "26ddb871-23ac-40d5-85ea-24ad3a575779"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/bape/PAYMENT_TRANSACTION_FREE_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.130.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "zbsp.bz.zbspcreatetransfer.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "zbsp.bz.zbspcreatetransfer.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteMenuTransfers",
+          "pattern": ":?query:",
+          "target": [
+            "TargetMenuTransfers"
+          ]
+        },
+        {
+          "name": "RouteMenuForeignTransfers",
+          "pattern": "foreign",
+          "target":[
+            "TargetMenuForeignTransfers"
+          ]
+
+        },
+        {  
+          "name": "RouteMenuNewIncoming",
+          "pattern": "incoming",
+          "target":[
+            "TargetMenuNewIncoming"
+          ]
+
+        },
+        {
+          "name": "RouteMenuNewOrderingTransfers",
+          "pattern": "/ordering",
+          "target":[
+            "TargetMenuNewOrderingTransfers"
+          ]
+        },
+        {
+          "name": "RouteMenuNewRecipientTransfers",
+          "pattern": "/recipient",
+          "target":[
+            "TargetMenuNewRecipientTransfers"
+          ]
+        },
+        {
+          "name": "RouteMenuNewTransactionChainTransfers",
+          "pattern": "/chain",
+          "target":[
+            "TargetMenuNewTransactionChainTransfers"
+          ]
+        },
+        {
+          "name": "RouteMenuNewACH",
+          "pattern": "ach",
+          "target":[
+            "TargetMenuNewACH"
+          ]
+        },
+        {
+          "name": "RouteMenuNewIFT",
+          "pattern": "ift",
+          "target":[
+            "TargetMenuNewIFT"
+          ]
+        },
+        {
+          "name": "RouteMenuNewPacs08",
+          "pattern": "pacs08",
+          "target":[
+            "TargetMenuNewPacs0809"
+          ]
+        },
+        {
+          "name": "RouteMenuNewPacs09",
+          "pattern": "pacs09",
+          "target":[
+            "TargetMenuNewPacs0809"
+          ]
+        }
+
+      ],
+      "targets": {
+        "TargetMenuTransfers": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "MenuTransfers",
+          "viewName": "MenuTransfers"
+        },
+      
+        "TargetMenuNewIncoming":{
+          "viewType": "XML",
+          "transition":"slide",
+          "clearControlAggregation": false,
+          "viewId": "MenuNewIncoming",
+          "viewName": "MenuNewIncoming"
+        },
+          "TargetMenuNewACH":{
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "MenuNewACH",
+          "viewName": "MenuNewACH"
+        },
+        "TargetMenuNewIFT":{
+          "viewType": "XML",
+          "transition":"slide",
+          "clearControlAggregation": false,
+          "viewId": "MenuNewIFT",
+          "viewName": "MenuNewIFT"
+        },
+        "TargetMenuNewPacs0809":
+        {
+          "viewType": "XML",
+          "transition":"slide",
+          "clearControlAggregation": false,
+          "viewId": "MenuNewPacs08",
+          "viewName": "MenuNewPacs08"
+        }, 
+
+        "TargetMenuForeignTransfers":{
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "MenuForeignTransfers",
+          "viewName": "MenuForeignTransfers"
+        },
+        "TargetMenuNewOrderingTransfers":{
+          "viewType": "XML",
+          "transition":"slide",
+          "clearControlAggregation": false,
+          "viewId": "MenuNewOrderingTransfers",
+          "viewName": "MenuNewOrderingTransfers"
+        },
+        "TargetMenuNewRecipientTransfers":{
+          "viewType": "XML",
+          "transition":"slide",
+          "clearControlAggregation": false,
+          "viewId": "MenuNewRecipientTransfers",
+          "viewName": "MenuNewRecipientTransfers"
+        },
+        "TargetMenuNewTransactionChainTransfers":{
+          "viewType": "XML",
+          "transition":"slide",
+          "clearControlAggregation": false,
+          "viewId": "MenuNewTransactionChainTransfers",
+          "viewName": "MenuNewTransactionChainTransfers"
+        }
+
+
+      }
+    },
+    "rootView": {
+      "viewName": "zbsp.bz.zbspcreatetransfer.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+  
+}

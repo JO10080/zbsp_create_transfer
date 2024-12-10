@@ -1,0 +1,21 @@
+<mvc:View controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuForeignTransfers"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    >
+ <Page id="page2" title="{i18n>title}">
+        <content>
+       <SelectList id="s3"
+					items="{
+						path: 'menu>/ProductCollection'
+					}"
+           itemPress="onSelect">
+					<core:Item id="s4" key="{menu>ProductId}" text="{menu>Name}" />
+				</SelectList>
+
+        </content>
+        
+
+    </Page>
+ 
+    </mvc:View>
