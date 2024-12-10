@@ -9,7 +9,7 @@ Swift 103 Transfer;
  xmlns:form="sap.ui.layout.form" 
  xmlns:l="sap.ui.layout" 
  xmlns:semantic="sap.m.semantic" 
- controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewOrderingTransfers">
+ controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewPacs08">
 	<ObjectPageLayout id="ObjectPageLayout1" showTitleInHeaderContent="false" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="false" isChildPage="true" upperCaseAnchorBar="false" busy="{detailView>/busy}">
 				<headerTitle>
 					 <ObjectPageHeader id="obj1" objectTitle="{detailView>/objectTypeName}" isObjectIconAlwaysVisible="false" isObjectTitleAlwaysVisible="true" isObjectSubtitleAlwaysVisible="false">

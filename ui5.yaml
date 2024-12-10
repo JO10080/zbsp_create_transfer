@@ -17,8 +17,8 @@ server:
           url: https://ui5.sap.com
         backend:
           - path: /sap
-            url: https://pydevbz.bancatlan.hn:44300/
-            client: '100'
+            url: http://pydevbz.bancatlan.hn:8000/
+            client: '110'
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

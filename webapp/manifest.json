@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata/bape/PAYMENT_TRANSACTION_FREE_SRV/",
+        "uri": "/sap/opu/odata/SAP/ZPE_TRANSFER_CREATE_SRV/",
         "type": "OData",
         "settings": {
           "annotations": [],

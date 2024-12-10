@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	
+	<SelectDialog
+		id="IdSelc"
+		title="{i18n>lbl.selectAccount}"
+		class="sapUiPopupWithPadding"
+		items="{/AccountSet}" 
+		search="_handleAccountValueHelpSearch"
+		confirm="_handleAccountValueHelpClose"
+		cancel="_handleAccountValueHelpClose">
+		<StandardListItem
+			id="lista"
+			icon="{ProductPicUrl}"
+			iconDensityAware="false"
+			iconInset="false"
+			title="{AccountID}"
+			description="{CurrencyCode} {ProductDescription}" />
+	</SelectDialog>
+</core:FragmentDefinition>
