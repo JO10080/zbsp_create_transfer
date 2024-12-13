@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewOrderingTransfers"
+	controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewIFT"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"

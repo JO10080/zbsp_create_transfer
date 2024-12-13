@@ -3,7 +3,7 @@
 -->
 
 <mvc:View
-	controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewOrderingTransfers"
+	controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewACH"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"

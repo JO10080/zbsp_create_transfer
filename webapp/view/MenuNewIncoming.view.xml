@@ -11,7 +11,7 @@ xmlns:sf="sap.ui.comp.smartfield"
 xmlns:form="sap.ui.layout.form"
 xmlns:l="sap.ui.layout"
 xmlns:semantic="sap.m.semantic"
-controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewOrderingTransfers">
+controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewIncoming">
 	<ObjectPageLayout id="ObjectPageLayout2" showTitleInHeaderContent="false" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="false" isChildPage="true" upperCaseAnchorBar="false" busy="{detailView>/busy}">
 				<headerTitle>
 					 <ObjectPageHeader id="header" objectTitle="{detailView>/objectTypeName}" isObjectIconAlwaysVisible="false" isObjectTitleAlwaysVisible="true" isObjectSubtitleAlwaysVisible="false">
@@ -40,7 +40,8 @@ controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewOrderingTransfers">
                               emptySpanL="4"
                                emptySpanM="4" emptySpanS="0" 
                               columnsXL="1" 
-                             columnsL="1" columnsM="1" singleContainerFullSize="false">
+                             columnsL="1" columnsM="1" singleContainerFullSize="false"
+							 binding="{/PaymentOrderSet('1')}">
 								 <form:content>				
 									<!-- Reference -->
 									<m:Label id="transactionReferenceLabel2" text="{i18n>lbl.transactionReference}" required="true"/>
@@ -130,12 +131,15 @@ controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewOrderingTransfers">
                              columnsXL="1" 
                              columnsL="1" 
                              columnsM="1" 
-                             singleContainerFullSize="false">
+                             singleContainerFullSize="false"
+							 binding="{/PaymentOrderSet('1')}">
 						<form:content>	
 							
 							<!-- Business Partner Num. and Name-->
 							<m:Label id="partnerIdLabel1" text="{i18n>lbl.partnerIdNumber}" required="true"/>
-							<m:Input id="partnerIdInput1" type="Text" change="onInputChange" showValueHelp="true" valueHelpRequest="_handlePartnerValueHelp" valueStateText="{i18n>ymsg.errorPartner}" maxLength="10"/>
+							<m:Input id="partnerIdInput1" type="Text" change="onInputChange" showValueHelp="true"
+							 valueHelpRequest="_handlePartnerValueHelp" 
+							 valueStateText="{i18n>ymsg.errorPartner}" maxLength="10"/>
 							<m:Text id="partnerNameInput1" text="{PartnerName}"/>
 							<!-- Cuenta-->
 							<m:Label id="partnerAccountIdLabel" text="{i18n>lbl.partnerAccount}" required="true"/>
@@ -177,7 +181,8 @@ controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewOrderingTransfers">
                              columnsXL="1" 
                              columnsL="1" 
                              columnsM="1" 
-                             singleContainerFullSize="false">
+                             singleContainerFullSize="false"
+							 binding="{/PaymentOrderSet('1')}">
 						<form:content>	
 
 							

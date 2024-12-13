@@ -80,6 +80,43 @@ sap.ui.define([
             sap.ui.getCore().byId("partnerList").removeSelections(true);
             this._partnerHelpDialog.close();
         },
+        handleCountyValueHelp : function (oEvent) {
+          this.inputId = "";
+          if(oEvent){
+              this.inputId = oEvent.getSource().getId();
+          }
+          // create value help dialog
+              if (!this._valueHelpDialog3) {
+                  this._valueHelpDialog3 = sap.ui.xmlfragment(
+                      "zbsp.bz.zbspcreatetransfer.view.SelectCountry3",
+                      this
+                  );
+                  this.getView().addDependent(this._valueHelpDialog3);
+              }
+              
+              // open value help dialog filtered by the input value
+              this._valueHelpDialog3.open();
+      },
+      handleSelectContryValueHelp : function (oEvent) {
+        var oTable = null;
+        var oIndices = null;
+        
+        console.log('entre al select');
+        oTable = sap.ui.getCore().byId("treeTableContry3");
+                    
+        oIndices = oTable.getSelectedIndices();
+        if(oIndices.length > 0){
+             var oObject = oTable.getContextByIndex(oIndices[0]).getObject();
+             console.log(oObject.landx);
+             this.getView().byId("beneCountyInput").setValue(oObject.land1);
+             this._valueHelpDialog3.close();
+             
+        }
+    },
+    handleCloseContryValueHelp : function (oEvent) {
+             this._valueHelpDialog3.close();
+
+    },
 
 	});
 });

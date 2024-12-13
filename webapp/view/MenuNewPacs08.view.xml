@@ -141,7 +141,8 @@ L="1" columnsM="1">
                              labelSpanXL="3" labelSpanL="3" 
                              labelSpanM="3" adjustLabelSpan="false" emptySpanXL="4" 
                              emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" 
-                             columnsL="1" columnsM="1" singleContainerFullSize="false">
+                             columnsL="1" columnsM="1" singleContainerFullSize="false" 
+							 binding="{/PaymentOrderSet('1')}">
 						<form:content>
 							<!--Nombre-->				
 							<m:Label id="recipientNameLabel" text="{i18n>lbl.recipientName}" required="true"/>
@@ -153,7 +154,7 @@ L="1" columnsM="1">
 							<m:Label id="recipientAddressLabel" text="{i18n>lbl.recipientAddress}" required="true"/>
 							<m:Input id="recipientAddressInput"  type="Text"/>
 							<!--BIC-->
-							<m:Label id="smart1" labelFor="recipientBank1Input" text="{i18n>lbl.bic}" />
+							<m:Label  id="label" labelFor="recipientBank1Input" text="{i18n>lbl.bic}" /> 
 							<sf:SmartField id="recipientBank1Input" value="{IntermediaryBankKey}"/>
 							<!-- bene Country -->
 							<m:Label id="beneCountyLabel" text="{i18n>lbl.beneCounty}" required="false"/>
@@ -187,7 +188,8 @@ L="1" columnsM="1">
                               emptySpanS="0" columnsXL="1" 
                               columnsL="1" 
                               columnsM="1" 
-                              singleContainerFullSize="false">
+                              singleContainerFullSize="false"
+							  binding="{/PaymentOrderSet('1')}">
 						<form:content>	
 						
 							<!--CorrespondentBank-->

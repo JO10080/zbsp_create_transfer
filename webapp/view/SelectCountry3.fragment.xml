@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns:m="sap.m"
+	xmlns="sap.ui.table"
+	xmlns:core="sap.ui.core">
+	<m:Dialog id="cntry" title="Country">  <!--heigth="400px"-->
+		
+		<!--path : 'fx>/ItemTypeSet',-->
+	  <m:content>
+		  <TreeTable
+	        id='treeTableContry3'
+	        selectionMode="Single"
+	        enableColumnReordering="false"
+	        rows="{
+	            path : '/PaicesSet'
+	        }">
+	
+	        <columns>
+	            <Column id="cde" label="Code">
+	                <template>
+	                    <m:Text id="lnd" text="{land1}" wrapping="false" />
+	                </template>
+	            </Column>
+	
+	            <Column id="cntry_1" label="Country">
+	                <template>
+	                    <m:Text id="lndx" text="{landx}" wrapping="false" />
+	                </template>
+	            </Column>		          
+	
+	        </columns>
+	
+	  	  </TreeTable>
+	    </m:content>
+	    <m:buttons>
+	     <m:Button id="handle_1" text="{i18n>btn.select}" press="handleSelectContryValueHelp"/>
+     	 <m:Button id="cnrty" text="{i18n>btn.cancel}" press="handleCloseContryValueHelp"/>
+    	</m:buttons>
+	   </m:Dialog>
+
+</core:FragmentDefinition>
