@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document 
+xmlns="urn:sap:tech:xsd:/bape_paymreq" 
+xsi:schemaLocation="urn:sap:tech:xsd:/bape_paymreq BAPE_IN_PAYM_REQ.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<PaymentRequest>
+		<ExtTransferID>JJPPTEST20241112101</ExtTransferID>				<!--Transaction Reference-->
+		<SenderCode>FIORI</SenderCode>									<!--fijo-->
+		<TypeCode>RTGS</TypeCode>										<!--RTGS: PACS008, RTGS9: PACS009-->
+		<OrderingAccount>
+			<Country>BZ</Country>										<!--Siempre BZ-->
+			<Bank>
+				<BankCode>2100</BankCode>								<!--SIEMPRE 2100-->
+			</Bank>
+			<Account>
+				<!-- <IBAN>HN58ATTD00000000002010000278</IBAN> -->
+				<AccountNumber>2120000716</AccountNumber>				<!--Customer Business Partner Account-->
+				<AccountType>2</AccountType>							<!--No es obligatorio, PE lo deduce, 1:ahorro, 2:cheques-->
+			</Account>
+		</OrderingAccount>
+		<Receiver>
+			<ExtReceiverId>JJPP20240909-004</ExtReceiverId>				<!--Transaction Reference-->
+			<Amount Ccy="BZD">90.27</Amount>							<!--Transfer amount and currency-->
+			<ReceiverAccount>
+				<Country>BZ</Country>									<!--Siempre BZ-->
+				<Bank>
+					<BankCode>0002</BankCode>							<!--Enviar el BankCode o el BIC en la siguiente tag-->
+					<!-- <BICFI>BRRDDOSDXXX</BICFI> -->
+				</Bank>
+				<Account>
+					<!-- <IBAN>DO28BAGR00000001212453611324</IBAN> -->
+					<AccountNumber>00002040000431</AccountNumber>		<!--Recipient Account-->
+					<AccountType>2</AccountType>						<!--1:cheques, 2:ahorros-->
+				</Account>
+			</ReceiverAccount>
+			<ReceiverDetails>
+				<Name>Juanjoze</Name>									<!--recipient name-->
+				<ID>HN12345678</ID>										<!--recipient id???? no está en la pantalla-->
+				<Note>Test Transfer JV</Note>							<!--????-->
+				<AddressDetails>										<!--Recipient Address-->
+					<Address>Address street 1</Address>					
+					<City>Tegucigalpa</City>
+					<Country>HN</Country>
+				</AddressDetails>
+				<ContactDetails>										<!--Contact Details-->
+					<Email>juan-jose.penella@sapfioneer.com</Email>		<!--????-->
+					<TelephoneNumber>+34654998877</TelephoneNumber>		<!--????-->
+				</ContactDetails>
+			</ReceiverDetails>
+			<RmtInf>													<!--Remittance information-->									
+				<PRType>ZPR001</PRType>									
+				<Content>remesa</Content>
+			</RmtInf>
+		</Receiver>
+	</PaymentRequest>
+</Document>

@@ -1,246 +1,514 @@
 <!--
 Swift 103 Transfer;
 -->
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.uxap"
- xmlns:core="sap.ui.core" 
- xmlns:m="sap.m" xmlns:f="sap.f" 
- xmlns:fb="sap.ui.comp.filterbar" 
- xmlns:sf="sap.ui.comp.smartfield" 
- xmlns:form="sap.ui.layout.form" 
- xmlns:l="sap.ui.layout" 
- xmlns:semantic="sap.m.semantic" 
- controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewPacs08">
-	<ObjectPageLayout id="ObjectPageLayout1" showTitleInHeaderContent="false" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="false" isChildPage="true" upperCaseAnchorBar="false" busy="{detailView>/busy}">
-				<headerTitle>
-					 <ObjectPageHeader id="obj1" objectTitle="{detailView>/objectTypeName}" isObjectIconAlwaysVisible="false" isObjectTitleAlwaysVisible="true" isObjectSubtitleAlwaysVisible="false">
-						<actions>					
-							<ObjectPageHeaderActionButton id="btnSave" hideText="false" text="{i18n>btn.save}" icon="sap-icon://complete" press="handleSave"/>
-							<ObjectPageHeaderActionButton id="pag1" hideIcon="true" hideText="false" text="{i18n>btn.cancel}" press="handleCancel"/>
-						</actions>
-		
-					</ObjectPageHeader>
-				</headerTitle>
-				
-		<sections>
-			
-			<!--
-			<ObjectPageSection title="{i18n>xtit.generalInfo}">
-				<subSections>
-					<ObjectPageSubSection>
-						<blocks>
-							<m:VBox class="sapUiSmallMargin">
-							 <form:SimpleForm id="ordenForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columns+
-L="1" columnsM="1">
-								 <form:content>			
-									<m:Label id="origFechaLabel" text="{i18n>lbl.orgDate}" required="true"/>
-									<m:DatePicker id="origFechaInput" change="onInputChange" value="{path:'masterView>/today', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}"/>								
-									<m:Label id="origOrdenLabel" text="{i18n>lbl.origOrder}" required="true"/>
-									<m:Input id="origOrdenInput" type="Text" change="onInputChange" value="{path: '/OrdenSet'}" showValueHelp="true" valueHelpRequest="_handleOrdenValueHelp" valueStateText="{i18n>ymsg.errorOrden}" maxLength="34"/>									
-									<m:Label id="symCuenta1Label"	text="{i18n>lbl.origCor}"/>					
-									<m:ComboBox id="symCuenta1Box"
-										items="{/SymCuenta1Set}"
-										visible="{= ${detailView>/objectType} === '10' ? true : false }" >
-										<core:Item  key="{Id}" text="{Name}" />
-									</m:ComboBox>			
-								</form:content>
-							  </form:SimpleForm>
-				       		 </m:VBox>
-						</blocks>
-					</ObjectPageSubSection>
-				</subSections>
-			</ObjectPageSection>			
-			-->
-			
-			<ObjectPageSection id="section1" title="{i18n>xtit.generalInfo}">
-				<subSections>
-					<ObjectPageSubSection id="subsection1">
-						<blocks>
-							<m:VBox id="vbox" class="sapUiSmallMargin">
-							 <form:SimpleForm id="generalInformationForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
-                              columnsXL="1" columnsL="1" columnsM="1">
-								 <form:content>	
-								
-									<!--Transaction Reference-->
-									<m:Label id="transactionReferenceLabel" text="{i18n>lbl.transactionReference}"/>
-									<m:Input id="transactionReferenceInput" type="Text" change="onInputChange" />
-									<!--BP Number-->
-									<m:Label id="partnerIdLabel" text="{i18n>lbl.partnerIdNumber}" required="true"/>
-									<m:Input id="partnerIdInput" type="Text" change="onInputChange" showValueHelp="true" valueHelpRequest="_handlePartnerValueHelp" valueStateText="{i18n>ymsg.errorPartner}" maxLength="10"/>
-									<!--BP Name-->
-									<m:Text id="partnerNameInput" text="{PartnerName}"/>
-									<!--BP Account-->
-									<m:Label id="accountIdLabel" text="{i18n>lbl.partnerAccount}" required="true"/>
-									<m:Input id="accountIdInput"
-										type="Text" 						
-										change="onInputChange"
-										value="{path: 'Name'}"
-										showValueHelp="true"
-										valueHelpRequest="_handleAccountValueHelp"
-										valueStateText="{i18n>ymsg.errorAccount}"
-										maxLength="34"/>
-									<!--BP Address-->
-									<m:Label id="orderAddressLabel" text="{i18n>lbl.orderAddress}" required="true"/>
-									<m:Input id="orderAddressInput" value="{OrderAddress}" type="Text"/>
-									<!--Amount-->
-									<m:Label id="amountLabel" text="{i18n>lbl.partnerAmount}" required="true"/>
-									<m:Input id="amountInput"
-										change="onNumberChange"
-										type="Number"
-										textAlign="Right"						
-										valueStateText="{i18n>ymsg.errorAmount}"/>
-									<!--Currency-->
-									<m:ComboBox id="currencyBox" 
-                                    items="{  
-                                        path: '/CurrencySet',    
-                                        filters: [{     
-                                            path: 'TransactionTypeCode', 
-                                            operator: 'BT',    
-                                            value1: '04'      
-                                        }]      
-                                        }"
-                                          valueStateText="{i18n>ymsg.errorCurrency}" 
-                                          required="true">
-										<core:Item id="currencyItem" key="{Id}" text="{Name}"/>
-									</m:ComboBox>	
-									
-									<!--File Amount-->
-									<m:Label id="amountFLabel" text="{i18n>lbl.outputFileAmount}"/>
-									<m:Input id="amountFInput" change="onNumberChange" value="{Amount}" type="Number" textAlign="Right" valueStateText="{i18n>ymsg.errorAmount}" placeholder="Amount in case transfer not in USD"/>
-									
-									<m:ComboBox id="currencyFBox" items="{             path: '/CurrencySet',                             filters: [{                       path: 'TransactionTypeCode',                       operator: 'BT',                       value1: '06'         
-                               }]            }" valueStateText="{i18n>ymsg.errorCurrency}">
-										<core:Item id="currencyFItem" key="{Id}" text="{Name}"/>
-									</m:ComboBox>
-									
-									<!--Charge Type-->
-									<m:Label id="chargeTypeLabel" text="{i18n>lbl.chargeType}" required="true"/>
-									<m:ComboBox id="chargeTypeBox" items="{/ChargeTypeSet}">
-										<core:Item id="chargeTypeItem" text="{Name}" key="{Id}"/>
-									</m:ComboBox>
-									
-									<!--Date-->
-									<m:Label id="customerValueDateLabel" text="{i18n>lbl.customerValueDate}"/>
-									<m:DatePicker id="customerValueDateInput" change="onInputChange" value="{path:'masterView>/defaultDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}"/>
-									
-					
-								</form:content>
-							  </form:SimpleForm>
-						 </m:VBox>
-						</blocks>
-					</ObjectPageSubSection>
-				</subSections>
-			</ObjectPageSection>
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:sf="sap.ui.comp.smartfield"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:semantic="sap.m.semantic"
+    controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewPacs08"
+>
+    <ObjectPageLayout
+        id="ObjectPageLayout1"
+        showTitleInHeaderContent="false"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="false"
+        isChildPage="true"
+        upperCaseAnchorBar="false"
+        busy="{detailView>/busy}"
+    >
+        <headerTitle>
+            <ObjectPageHeader
+                id="obj1"
+                objectTitle="{detailView>/objectTypeName}"
+                isObjectIconAlwaysVisible="false"
+                isObjectTitleAlwaysVisible="true"
+                isObjectSubtitleAlwaysVisible="false"
+            >
+                <actions>
+                    <ObjectPageHeaderActionButton
+                        id="btnSave"
+                        hideText="false"
+                        text="{i18n>btn.save}"
+                        icon="sap-icon://complete"
+                        press="handleSave"
+                    />
+                    <ObjectPageHeaderActionButton
+                        id="pag1"
+                        hideIcon="true"
+                        hideText="false"
+                        text="{i18n>btn.cancel}"
+                        press="handleCancel"
+                    />
+                </actions>
+            </ObjectPageHeader>
+        </headerTitle>
 
-			<ObjectPageSection id="section" title="{i18n>xtit.benefInfo}">
-				<subSections>
-					<ObjectPageSubSection id="subsection2">
-					  <blocks>
-						<m:VBox id="vbox2" class="sapUiSmallMargin">
-							<form:SimpleForm id="recipientForm" editable="true"
-                             layout="ResponsiveGridLayout" 
-                             labelSpanXL="3" labelSpanL="3" 
-                             labelSpanM="3" adjustLabelSpan="false" emptySpanXL="4" 
-                             emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" 
-                             columnsL="1" columnsM="1" singleContainerFullSize="false" 
-							 binding="{/PaymentOrderSet('1')}">
-						<form:content>
-							<!--Nombre-->				
-							<m:Label id="recipientNameLabel" text="{i18n>lbl.recipientName}" required="true"/>
-							<m:Input id="recipientNameInput" type="Text" change="onInputChange"/>
-							<!--BankAcco-->
-							<m:Label id="recipientAccountIdLabel" text="{i18n>lbl.recipientAccountId}" required="true"/>
-							<m:Input id="recipientAccountIdInput" type="Text" value="{RecipientAccountId}"/>
-							<!--Direccion-->
-							<m:Label id="recipientAddressLabel" text="{i18n>lbl.recipientAddress}" required="true"/>
-							<m:Input id="recipientAddressInput"  type="Text"/>
-							<!--BIC-->
-							<m:Label  id="label" labelFor="recipientBank1Input" text="{i18n>lbl.bic}" /> 
-							<sf:SmartField id="recipientBank1Input" value="{IntermediaryBankKey}"/>
-							<!-- bene Country -->
-							<m:Label id="beneCountyLabel" text="{i18n>lbl.beneCounty}" required="false"/>
-							<m:Input id="beneCountyInput" value="{land1}" showValueHelp="true" valueHelpRequest="handleCountyValueHelp"/>
-							<!--BankName-->
-							<m:Label id="rcpinstNameLabel" text="{i18n>lbl.BankName}" />
-							<m:Input id="rcpinstNameInput" type="Text" />	
-							<!--BankAddr-->
-							<m:Label id="rcpinstAddr1Label" text="{i18n>lbl.BankDirecction}" />
-							<m:Input id="rcpinstAddr1Input" type="Text" value="{RcpInstAddr1}"/>
-							<!--Cuenta-->	
-							<m:Label id="rcpinstAccountLabel" text="{i18n>lbl.BankAccount}"/>
-							<m:Input id="rcpinstAccountInput" type="Text"/>
-							</form:content>
-					    </form:SimpleForm>	
-						</m:VBox>                                	
-    				  </blocks>
-					</ObjectPageSubSection>					
-				</subSections>
-			</ObjectPageSection>
-			<ObjectPageSection id="section2" title="{i18n>xtit.controlInfo}">
-				<subSections>
-					<ObjectPageSubSection id="sub2">
-					  <blocks>
-						<m:VBox id="vbox3" class="sapUiSmallMargin">
-							<form:SimpleForm id="controlForm" editable="true"
-                             layout="ResponsiveGridLayout" 
-                             labelSpanXL="3" labelSpanL="3" labelSpanM="3" 
-                             adjustLabelSpan="false"
-                              emptySpanXL="4" emptySpanL="4" emptySpanM="4" 
-                              emptySpanS="0" columnsXL="1" 
-                              columnsL="1" 
-                              columnsM="1" 
-                              singleContainerFullSize="false"
-							  binding="{/PaymentOrderSet('1')}">
-						<form:content>	
-						
-							<!--CorrespondentBank-->
-							<m:Label id="smart3" labelFor="clearingAggrementInput" text="{i18n>lbl.clearingAggrement}"/>
-							<sf:SmartField id="clearingAggrementInput" value="{ClearingAgreementId}" visible="{= ${detailView>/objectType} !== '99' ? true : false }">
-							</sf:SmartField>
-							<!--
-							<m:CheckBox id="invEsp" text="{i18n>lbl.invEsp}" selected="false" enabled="true"/>
-							-->
-							<!--BankBic combo-->
-							<m:Label id="label10" labelFor="intermediaryBankInput" text="{i18n>lbl.intermediaryBankInput}"/>
-							<sf:SmartField id="intermediaryBankInput" value="{IntermediaryBankKey}">
-							</sf:SmartField>
-							
-							<!--Intermediary bank-->
-							<m:Label id="instituteNameLabel" text="{i18n>lbl.intermediaryBank}"/>
-							<m:Input id="instituteNameInput" type="Text" value="{InstituteName}"/>
-							
-							<!--Intermediary ABA/Routing Account-->
-							<m:Label id="intermediaryBankLabel" text="{i18n>lbl.instituteNameLabel}"/>
-							<m:Input id="intermediaryBank" value="{IntermediaryBank}"/>
-							
-							<!--Intermediary Address-->
-							<m:Label id="instituteAddr1Label" text="{i18n>lbl.instituteAddr1Label}" />
-							<m:Input id="instituteAddr1Input" type="Text" value="{InstituteAddr1}"/>
-							
-							<!--Addenda Information-->
-							<m:Label id="descriptionLabel" text="{i18n>lbl.description}" required="true"/>
-							<m:Input id="descriptionInput" value="{Description}"/>
-							
-							<!--Instruction ACC-->
-							<m:Label id="description1Label" text="{i18n>lbl.description1}"/>
-							<m:Input id="description1Input" value="{Description}"/>
-							
-							<!--Instruction BNF-->
-							<m:Label id="description2Label" text="{i18n>lbl.description2}"/>
-							<m:Input id="description2Input" value="{Description}"/>
-							
-							<!--Instruction REC-->
-							<m:Label id="description4Label" text="{i18n>lbl.description4}"/>
-							<m:Input id="description4Input" value="{Description}"/>
-							
-						</form:content>
-					    </form:SimpleForm>	
-						</m:VBox>                                	
-    				  </blocks>
-					</ObjectPageSubSection>					
-				</subSections>
-			</ObjectPageSection>
-		</sections>
-	</ObjectPageLayout>	
-	
+        <sections>
+            <ObjectPageSection
+                id="section1"
+                title="{i18n>xtit.generalInfo}"
+            >
+                <subSections>
+                    <ObjectPageSubSection id="subsection1">
+                        <blocks>
+                            <m:VBox
+                                id="vbox"
+                                class="sapUiSmallMargin"
+                            >
+                                <form:SimpleForm
+                                    id="generalInformationForm"
+                                    editable="true"
+                                    layout="ResponsiveGridLayout"
+                                    labelSpanXL="3"
+                                    labelSpanL="3"
+                                    labelSpanM="3"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="4"
+                                    emptySpanL="4"
+                                    emptySpanM="4"
+                                    emptySpanS="0"
+                                    columnsXL="1"
+                                    columnsL="1"
+                                    columnsM="1"
+                                >
+                                    <form:content>
+                                        <!--Transaction Reference-->
+                                        <m:Label
+                                            id="transactionReferenceLabel"
+                                            text="{i18n>lbl.transactionReference}"
+                                        />
+                                        <m:Input
+                                            id="transactionReferenceInput"
+                                            type="Text"
+                                            change="onInputChange"
+                                            value="{formData>/transactionReference}"
+                                        />
+                                        <!--BP Number-->
+                                        <m:Label
+                                            id="partnerIdLabel"
+                                            text="{i18n>lbl.partnerIdNumber}"
+                                            required="true"
+                                        />
+                                        <m:Input
+                                            id="partnerIdInput"
+                                            type="Text"
+                                            change="onInputChange"
+                                            showValueHelp="true"
+                                            valueHelpRequest="_handlePartnerValueHelp"
+                                            value="{formData>/partnerIdNumber}"
+                                            valueStateText="{i18n>ymsg.errorPartner}"
+                                            maxLength="10"
+                                        />
+                                        <!--BP Name-->
+                                        <m:Text
+                                            id="partnerNameInput"
+                                            text="{formData>/partnerName}"
+                                        />
+                                        <!--BP Account-->
+                                        <m:Label
+                                            id="accountIdLabel"
+                                            text="{i18n>lbl.partnerAccount}"
+                                            required="true"
+                                        />
+                                        <m:Input
+                                            id="accountIdInput"
+                                            type="Text"
+                                            change="onInputChange"
+                                            value="{formData>/partnerAccount}"
+                                            showValueHelp="true"
+                                            valueHelpRequest="_handleAccountValueHelp"
+                                            valueStateText="{i18n>ymsg.errorAccount}"
+                                            maxLength="34"
+                                        />
+                                        <!--BP Address-->
+                                        <m:Label
+                                            id="orderAddressLabel"
+                                            text="{i18n>lbl.orderAddress}"
+                                            required="true"
+                                        />
+                                        <m:Input
+                                            id="orderAddressInput"
+                                            value="{formData>/orderAddress}"
+                                            type="Text"
+                                        />
+                                        <!--Amount-->
+                                        <m:Label
+                                            id="amountLabel"
+                                            text="{i18n>lbl.partnerAmount}"
+                                            required="true"
+                                        />
+                                        <m:Input
+                                            id="amountInput"
+                                            change="onNumberChange"
+                                            type="Number"
+                                            textAlign="Right"
+                                            value="{formData>/amount}"
+                                            valueStateText="{i18n>ymsg.errorAmount}"
+                                        />
+                                        <!--Currency-->
+                                        <m:ComboBox
+                                            id="currencyBox"
+                                            items="{  
+            									path: '/CurrencySet',    
+												filters: [{     
+													path: 'TransactionTypeCode', 
+													operator: 'BT',    
+													value1: '04'      
+												}]      
+											}"
+                                            valueStateText="{i18n>ymsg.errorCurrency}"
+                                            required="true"
+                                            selectedKey="{formData>/currency}"
+                                        >
+                                            <core:Item
+                                                id="currencyItem"
+                                                key="{Id}"
+                                                text="{Name}"
+                                            />
+                                        </m:ComboBox>
 
+                                        <!--File Amount-->
+                                        <m:Label
+                                            id="amountFLabel"
+                                            text="{i18n>lbl.outputFileAmount}"
+                                        />
+                                        <m:Input
+                                            id="amountFInput"
+                                            change="onNumberChange"
+                                            value="{formData>/fileAmount}"
+                                            type="Number"
+                                            textAlign="Right"
+                                            valueStateText="{i18n>ymsg.errorAmount}"
+                                            placeholder="Amount in case transfer not in USD"
+                                        />
+
+                                        <m:ComboBox
+                                            id="currencyFBox"
+                                            items="{ 
+												path: '/CurrencySet', 
+												filters: [{ 
+													path: 'TransactionTypeCode', 
+													operator: 'BT', 
+													value1: '06' 
+												}]
+											}"
+                                            valueStateText="{i18n>ymsg.errorCurrency}"
+                                            selectedKey="{formData>/fileCurrency}"
+                                        >
+                                            <core:Item
+                                                id="currencyFItem"
+                                                key="{Id}"
+                                                text="{Name}"
+                                            />
+                                        </m:ComboBox>
+
+                                        <!--Charge Type-->
+                                        <m:Label
+                                            id="chargeTypeLabel"
+                                            text="{i18n>lbl.chargeType}"
+                                            required="true"
+                                        />
+                                        <m:ComboBox
+                                            id="chargeTypeBox"
+                                            items="{/ChargeTypeSet}"
+                                            selectedKey="{formData>/chargeType}"
+                                        >
+                                            <core:Item
+                                                id="chargeTypeItem"
+                                                text="{Name}"
+                                                key="{Id}"
+                                            />
+                                        </m:ComboBox>
+
+                                        <!--Date-->
+                                        <m:Label
+                                            id="customerValueDateLabel"
+                                            text="{i18n>lbl.customerValueDate}"
+                                        />
+                                        <m:DatePicker
+                                            id="customerValueDateInput"
+                                            change="onInputChange"
+                                            value="{path:'formData>/customerValueDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}"
+                                        />
+                                    </form:content>
+                                </form:SimpleForm>
+                            </m:VBox>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection
+                id="section"
+                title="{i18n>xtit.benefInfo}"
+            >
+                <subSections>
+                    <ObjectPageSubSection id="subsection2">
+                        <blocks>
+                            <m:VBox
+                                id="vbox2"
+                                class="sapUiSmallMargin"
+                            >
+                                <form:SimpleForm
+                                    id="recipientForm"
+                                    editable="true"
+                                    layout="ResponsiveGridLayout"
+                                    labelSpanXL="3"
+                                    labelSpanL="3"
+                                    labelSpanM="3"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="4"
+                                    emptySpanL="4"
+                                    emptySpanM="4"
+                                    emptySpanS="0"
+                                    columnsXL="1"
+                                    columnsL="1"
+                                    columnsM="1"
+                                    singleContainerFullSize="false"
+                                    binding="{/PaymentOrderSet('1')}"
+                                >
+                                    <form:content>
+                                        <!-- Nombre -->
+                                        <m:Label
+                                            id="recipientNameLabel"
+                                            text="{i18n>lbl.recipientName}"
+                                            required="true"
+                                        />
+                                        <m:Input
+                                            id="recipientNameInput"
+                                            type="Text"
+                                            value="{formData>/recipientName}"
+                                            change="onInputChange"
+                                        />
+
+                                        <!-- Bank Account -->
+                                        <m:Label
+                                            id="recipientAccountIdLabel"
+                                            text="{i18n>lbl.recipientAccountId}"
+                                            required="true"
+                                        />
+                                        <m:Input
+                                            id="recipientAccountIdInput"
+                                            type="Text"
+                                            value="{formData>/recipientAccountId}"
+                                        />
+
+                                        <!-- Dirección -->
+                                        <m:Label
+                                            id="recipientAddressLabel"
+                                            text="{i18n>lbl.recipientAddress}"
+                                            required="true"
+                                        />
+                                        <m:Input
+                                            id="recipientAddressInput"
+                                            type="Text"
+                                            value="{formData>/recipientAddress}"
+                                        />
+
+                                        <!-- BIC -->
+                                        <m:Label
+                                            id="bicLabel"
+                                            labelFor="recipientBank1Input"
+                                            text="{i18n>lbl.bic}"
+                                        />
+                                        <sf:SmartField
+                                            id="recipientBank1Input"
+                                            value="{IntermediaryBankKey}"
+                                        />
+
+                                        <!-- Bene Country -->
+                                        <m:Label
+                                            id="beneCountryLabel"
+                                            text="{i18n>lbl.beneCounty}"
+                                            required="false"
+                                        />
+                                        <m:Input
+                                            id="beneCountryInput"
+                                            value="{formData>/beneCountry}"
+                                            showValueHelp="true"
+                                            valueHelpRequest="handleCountyValueHelp"
+                                        />
+
+                                        <!-- Bank Name -->
+                                        <m:Label
+                                            id="bankNameLabel"
+                                            text="{i18n>lbl.BankName}"
+                                        />
+                                        <m:Input
+                                            id="bankNameInput"
+                                            type="Text"
+                                            value="{formData>/bankName}"
+                                        />
+
+                                        <!-- Bank Address -->
+                                        <m:Label
+                                            id="bankAddressLabel"
+                                            text="{i18n>lbl.BankDirecction}"
+                                        />
+                                        <m:Input
+                                            id="bankAddressInput"
+                                            type="Text"
+                                            value="{formData>/bankAddress}"
+                                        />
+
+                                        <!-- Cuenta -->
+                                        <m:Label
+                                            id="bankAccountLabel"
+                                            text="{i18n>lbl.BankAccount}"
+                                        />
+                                        <m:Input
+                                            id="bankAccountInput"
+                                            type="Text"
+                                            value="{formData>/bankAccount}"
+                                        />
+                                    </form:content>
+                                </form:SimpleForm>
+                            </m:VBox>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <ObjectPageSection
+                id="section2"
+                title="{i18n>xtit.controlInfo}"
+            >
+                <subSections>
+                    <ObjectPageSubSection id="sub2">
+                        <blocks>
+                            <m:VBox
+                                id="vbox3"
+                                class="sapUiSmallMargin"
+                            >
+                                <form:SimpleForm
+                                    id="controlForm"
+                                    editable="true"
+                                    layout="ResponsiveGridLayout"
+                                    labelSpanXL="3"
+                                    labelSpanL="3"
+                                    labelSpanM="3"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="4"
+                                    emptySpanL="4"
+                                    emptySpanM="4"
+                                    emptySpanS="0"
+                                    columnsXL="1"
+                                    columnsL="1"
+                                    columnsM="1"
+                                    singleContainerFullSize="false"
+                                    binding="{/PaymentOrderSet('1')}"
+                                >
+                                    <form:content>
+                                        <!--CorrespondentBank-->
+                                        <m:Label
+                                            id="smart3"
+                                            labelFor="clearingAggrementInput"
+                                            text="{i18n>lbl.clearingAggrement}"
+                                        />
+                                        <sf:SmartField
+                                            id="clearingAggrementInput"
+                                            value="{ClearingAgreementId}"
+                                            visible="{= ${detailView>/objectType} !== '99' ? true : false }"
+                                        />
+
+                                        <!--BankBic combo-->
+                                        <m:Label
+                                            id="label10"
+                                            labelFor="intermediaryBankInput"
+                                            text="{i18n>lbl.intermediaryBankInput}"
+                                        />
+                                        <sf:SmartField
+                                            id="intermediaryBankInput"
+                                            value="{IntermediaryBankKey}"
+                                        />
+
+                                        <!--Intermediary bank-->
+                                        <m:Label
+                                            id="instituteNameLabel"
+                                            text="{i18n>lbl.intermediaryBank}"
+                                        />
+                                        <m:Input
+                                            id="instituteNameInput"
+                                            type="Text"
+                                            value="{formData>/instituteName}"
+                                        />
+
+                                        <!--Intermediary ABA/Routing Account-->
+                                        <m:Label
+                                            id="intermediaryBankLabel"
+                                            text="{i18n>lbl.instituteNameLabel}"
+                                        />
+                                        <m:Input
+                                            id="intermediaryBank"
+                                            value="{formData>/intermediaryBank}"
+                                        />
+
+                                        <!--Intermediary Address-->
+                                        <m:Label
+                                            id="instituteAddr1Label"
+                                            text="{i18n>lbl.instituteAddr1Label}"
+                                        />
+                                        <m:Input
+                                            id="instituteAddr1Input"
+                                            type="Text"
+                                            value="{formData>/instituteAddr1}"
+                                        />
+
+                                        <!--Addenda Information-->
+                                        <m:Label
+                                            id="descriptionLabel"
+                                            text="{i18n>lbl.description}"
+                                            required="true"
+                                        />
+                                        <m:Input
+                                            id="descriptionInput"
+                                            value="{formData>/description}"
+                                        />
+
+                                        <!--Instruction ACC-->
+                                        <m:Label
+                                            id="description1Label"
+                                            text="{i18n>lbl.description1}"
+                                        />
+                                        <m:Input
+                                            id="description1Input"
+                                            value="{formData>/description1}"
+                                        />
+
+                                        <!--Instruction BNF-->
+                                        <m:Label
+                                            id="description2Label"
+                                            text="{i18n>lbl.description2}"
+                                        />
+                                        <m:Input
+                                            id="description2Input"
+                                            value="{formData>/description2}"
+                                        />
+
+                                        <!--Instruction REC-->
+                                        <m:Label
+                                            id="description4Label"
+                                            text="{i18n>lbl.description4}"
+                                        />
+                                        <m:Input
+                                            id="description4Input"
+                                            value="{formData>/description4}"
+                                        />
+                                    </form:content>
+                                </form:SimpleForm>
+                            </m:VBox>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
 </mvc:View>

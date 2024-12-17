@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataPDU xmlns="urn:swift:saa:xsd:saa.2.0" 
+xmlns:Sw="urn:swift:snl:ns.Sw" 
+xmlns:SwGbl="urn:swift:snl:ns.SwGbl" 
+xmlns:SwInt="urn:swift:snl:ns.SwInt" 
+xmlns:SwSec="urn:swift:snl:ns.SwSec">
+   <Header>
+      <Message>
+         <SenderReference>OATTDHNTEXXX008000000010234$20230907151808</SenderReference>
+         <MessageIdentifier>pacs.008.001.08</MessageIdentifier>
+         <Format>MX</Format>
+         <SubFormat>Input</SubFormat>
+         <Sender>
+            <DN>o=attdhnte,o=swift</DN>
+            <FullName>
+               <X1>CEBBBZBZXXX</X1>
+            </FullName>
+         </Sender>
+         <Receiver>
+            <DN>o=attdhnte,o=swift</DN>
+            <FullName>
+               <X1>LIBABZBZXXX</X1>
+            </FullName>
+         </Receiver>
+         <InterfaceInfo>
+            <UserReference>TC01.01</UserReference>
+         </InterfaceInfo>
+         <NetworkInfo>
+            <Priority>Normal</Priority>
+            <Service>swift.finplus!pf</Service>
+            <SWIFTNetNetworkInfo />
+         </NetworkInfo>
+      </Message>
+   </Header>
+   <Body>
+      <AppHdr xmlns="urn:iso:std:iso:20022:tech:xsd:head.001.001.02">
+         <Fr>
+            <FIId>
+               <FinInstnId>
+                  <BICFI>CEBBBZBZXXX</BICFI>
+               </FinInstnId>
+            </FIId>
+         </Fr>
+         <To>
+            <FIId>
+               <FinInstnId>
+                  <BICFI>LIBABZBZXXX</BICFI>
+               </FinInstnId>
+            </FIId>
+         </To>
+         <BizMsgIdr>CEBB202410319000000002</BizMsgIdr> <!-- CEBB + YEARMONTHDAY + 9 + SECUENCIAL -->
+         <MsgDefIdr>pacs.008.001.08</MsgDefIdr>
+         <BizSvc>swift.cbprplus.01</BizSvc>
+         <CreDt>2023-09-07T15:18:07-06:00</CreDt>
+      </AppHdr>
+      <Document xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.008.001.08">
+         <FIToFICstmrCdtTrf>
+            <GrpHdr>
+               <MsgId>CEBB202410319000000002</MsgId> <!-- CEBB + YEARMONTHDAY + 9 + SECUENCIAL -->
+               <CreDtTm>2023-09-07T15:18:07-06:00</CreDtTm>
+               <NbOfTxs>1</NbOfTxs>
+               <SttlmInf>
+                  <SttlmMtd>CLRG</SttlmMtd>
+                  <ClrSys>
+                     <Cd>RTG</Cd>
+                  </ClrSys>
+               </SttlmInf>
+            </GrpHdr>
+            <CdtTrfTxInf>
+               <PmtId>
+                  <InstrId>0001ATTD5001954</InstrId>
+                  <EndToEndId>E2E20230315-002-002</EndToEndId>
+                  <TxId>CEBBBZBZ00000000000003</TxId> <!-- BIC + secuencial -->
+                  <UETR>b1cac04e-216e-412e-b131-609047a5bb10</UETR>
+               </PmtId>
+               <PmtTpInf>
+                  <SvcLvl>
+                     <Prtry>0806</Prtry>
+                  </SvcLvl>
+                  <LclInstrm>
+                     <Prtry>RTGSFIToFICustomerCredit</Prtry>
+                  </LclInstrm>
+                  <CtgyPurp>
+                     <Cd>CASH</Cd>
+                  </CtgyPurp>
+               </PmtTpInf>
+               <IntrBkSttlmAmt Ccy="BZD">22.02</IntrBkSttlmAmt>
+               <IntrBkSttlmDt>2023-09-07</IntrBkSttlmDt>
+               <ChrgBr>DEBT</ChrgBr>
+               <InstgAgt>
+                  <FinInstnId>
+                     <BICFI>CEBBBZBZXXX</BICFI>
+                  </FinInstnId>
+               </InstgAgt>
+               <InstdAgt>
+                  <FinInstnId>
+                     <BICFI>LIBABZBZXXX</BICFI>
+                    <!--   <ClrSysMmbId>
+                       <ClrSysId>
+                           <Cd>USPID</Cd>
+                        </ClrSysId>
+                        <MmbId>2000</MmbId>
+                     </ClrSysMmbId> -->
+                  </FinInstnId>
+               </InstdAgt>
+               <Dbtr>
+                  <Nm>Cliente Banco Occidente</Nm>
+                  <PstlAdr>
+					<StrtNm>Calle uno</StrtNm>
+					<TwnNm>Binefar</TwnNm>
+					<Ctry>BZ</Ctry>
+                    <AdrLine>Dbtr Address</AdrLine>
+                    <AdrLine>Dbtr Address Details2</AdrLine>
+                  </PstlAdr>
+                  <Id>
+                     <PrvtId>
+                        <DtAndPlcOfBirth>
+                           <BirthDt>1990-08-03</BirthDt>
+                           <CityOfBirth>Tegucigalpa1</CityOfBirth>
+                           <CtryOfBirth>BZ</CtryOfBirth>
+                        </DtAndPlcOfBirth>
+                        <Othr>
+                           <Id>BZ45454567001</Id>
+                           <SchmeNm>
+                              <Cd>CUST</Cd>
+                           </SchmeNm>
+                        </Othr>
+                     </PrvtId>
+                  </Id>
+               </Dbtr>
+               <DbtrAcct>
+                  <Id>
+                     <Othr>
+                        <Id>212011080040</Id>
+                        <!-- <SchmeNm>
+                           <Cd>BBAN</Cd>
+                        </SchmeNm> -->
+                     </Othr>
+                  </Id>
+                  <Tp>
+                     <Prtry>2</Prtry>
+                  </Tp>
+               </DbtrAcct>
+               <DbtrAgt>
+                  <FinInstnId>
+                     <BICFI>BOCCHNTEXXX</BICFI>
+                  </FinInstnId>
+               </DbtrAgt>
+               <CdtrAgt>
+                  <FinInstnId>
+                     <BICFI>LIBABZBZXXX</BICFI>
+                     <ClrSysMmbId>
+                        <!-- <ClrSysId>
+                           <Cd>USPID</Cd>
+                        </ClrSysId> -->
+                        <MmbId>2000</MmbId>
+                     </ClrSysMmbId>
+					 <PstlAdr>
+						<Ctry>HN</Ctry>
+					 </PstlAdr>
+                  </FinInstnId>
+               </CdtrAgt>
+               <Cdtr>
+                  <Nm>Frutas y verduras SL</Nm>
+                  <PstlAdr>
+					<StrtNm>Calle Buenavista</StrtNm>
+					<TwnNm>Esplus</TwnNm>
+					<Ctry>BZ</Ctry>
+                     <AdrLine>Direccion 1</AdrLine>
+                     <AdrLine>Direccion 2</AdrLine>
+                  </PstlAdr>
+                  <Id>
+                     <OrgId>
+                        <!-- <DtAndPlcOfBirth>
+                           <BirthDt>1990-08-03</BirthDt>
+                           <CityOfBirth>Tegucigalpa1</CityOfBirth>
+                           <CtryOfBirth>HN</CtryOfBirth>
+                        </DtAndPlcOfBirth> -->
+                        <Othr>
+                           <Id>0000000000000</Id>
+                        </Othr>
+                     </OrgId>
+                  </Id>
+               </Cdtr>
+               <CdtrAcct>
+                  <Id>
+                     <Othr>
+                        <Id>2120000716</Id>
+                        <!-- <SchmeNm>
+                           <Cd>BBAN</Cd>
+                        </SchmeNm> -->
+                     </Othr>
+                  </Id>
+                  <Tp>
+                     <Cd>2</Cd>
+                  </Tp>
+               </CdtrAcct>
+               <InstrForNxtAgt>
+                  <InstrInf>PAGO DE SUMINISTROS</InstrInf>
+               </InstrForNxtAgt>
+               <RmtInf>
+                  <Strd>
+                     <CdtrRefInf>
+                        <Tp>
+                           <CdOrPrtry>
+                              <Prtry>/772</Prtry>
+                           </CdOrPrtry>
+                        </Tp>
+                     </CdtrRefInf>
+                     <AddtlRmtInf>PAGO DE SUMINISTROS</AddtlRmtInf>
+                  </Strd>
+               </RmtInf>
+            </CdtTrfTxInf>
+         </FIToFICstmrCdtTrf>
+      </Document>
+   </Body>
+</DataPDU>
