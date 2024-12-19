@@ -1,14 +1,21 @@
 <!--
 Swift 103 Transfer;
 -->
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.uxap"
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+ xmlns="sap.uxap"
  xmlns:core="sap.ui.core" 
- xmlns:m="sap.m" xmlns:f="sap.f" 
+ xmlns:m="sap.m" 
+ xmlns:table="sap.m.Table"
+ xmlns:f="sap.f" 
  xmlns:fb="sap.ui.comp.filterbar" 
  xmlns:sf="sap.ui.comp.smartfield" 
  xmlns:form="sap.ui.layout.form" 
  xmlns:l="sap.ui.layout" 
  xmlns:semantic="sap.m.semantic" 
+ xmlns:smart="sap.ui.comp.smarttable"
+ xmlns:columnmenu="sap.m.table.columnmenu"
+ xmlns:mm="sap.m.Text"
+ xmlns:t="sap.ui.table"
  controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewPacs08">
 	<ObjectPageLayout id="ObjectPageLayout1" showTitleInHeaderContent="false" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="false" isChildPage="true" upperCaseAnchorBar="false" busy="{detailView>/busy}">
 				<headerTitle>
@@ -122,7 +129,48 @@ L="1" columnsM="1">
 									<m:Label id="customerValueDateLabel" text="{i18n>lbl.customerValueDate}"/>
 									<m:DatePicker id="customerValueDateInput" change="onInputChange" value="{path:'masterView>/defaultDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}"/>
 									
-					
+									<!--CBB Permit No-->									 
+    						<!-- Input donde se ingresara el codigo -->
+			
+    <!-- Input field for entering the code -->
+	<m:Label id="labelCode" text="{i18n>lbl.cbbpermit}" />
+    <m:Input id="inputCode" placeholder="Ingrese un Codigo" liveChange="onCodeChange" />
+
+    <!-- Button to add a new row to the table -->
+    <m:Button id="button3" text="Add Row" press="onAddRow" visible="false" />
+
+    <!-- Button to save the data -->
+    <m:Button id="button4" text="Save Data" press="onSaveData" visible="false" />
+
+    <!-- Button to delete the selected row -->
+    <m:Button id="button5" text="Delete Selected Row" press="onDeleteRow" visible="false" />
+
+    <!-- Table to display the data; initially hidden -->
+    <m:Table id="dataTable" width="100%" visible="false" mode="SingleSelect" selectionChange="onSelectionChange">
+      <m:columns>
+        <m:Column id="column5">  
+          <m:Text id="text4" text="Permit No."/>
+        </m:Column>
+        <m:Column id="column6">
+          <m:Text id="text5" text="Amount"/>
+        </m:Column>
+        <m:Column id="column7">
+          <m:Text id="text6" text="Approval Date"/>
+        </m:Column>
+      </m:columns>
+
+      <!-- Editable rows with Input fields -->
+      <m:items>
+        <m:ColumnListItem id="column8">
+          <m:cells>
+            <m:Input id="input1" value="{permitNo}" width="100%" />
+            <m:Input id="input2" value="{amount}" width="100%" />
+            <m:Input id="input3" value="{approvalDate}" width="100%" />
+          </m:cells>
+        </m:ColumnListItem>
+      </m:items>
+    </m:Table>
+  
 								</form:content>
 							  </form:SimpleForm>
 						 </m:VBox>
@@ -213,13 +261,52 @@ L="1" columnsM="1">
 							<m:Input id="intermediaryBank" value="{IntermediaryBank}"/>
 							
 							<!--Intermediary Address-->
-							<m:Label id="instituteAddr1Label" text="{i18n>lbl.instituteAddr1Label}" />
-							<m:Input id="instituteAddr1Input" type="Text" value="{InstituteAddr1}"/>
+							 <!-- <m:Label id="instituteAddr1Label" text="{i18n>lbl.instituteAddr1Label}" />
+							<m:Input id="instituteAddr1Input" type="Text" value="{InstituteAddr1}"/>  -->
+						
+							<!--Street Name-->
+							<m:Label id="streetlabel" text="{i18n>lbl.streetNameLabel}" />
+							<m:Input id="streetinput1" type="Text" value="{street1}"/>
 							
+							<!--Building Number-->
+							<m:Label id="BuildingNumberlabel" text="{i18n>lbl.BuildingNumber}" />
+							<m:Input id="BuildingNumberinput" type="Text" value="{building1}" />
+							
+							<!--Building Name-->
+							<m:Label id="BuildingNamelabel" text="{i18n>lbl.BuildingName}" />
+							<m:Input id="BuildingNameinput" type="Text" value="{buildingname1}" />
+							
+							<!--Town Name-->
+							<m:Label id="TownNamelabel" text="{i18n>lbl.TownName}" />
+							<m:Input id="TownNameinput" type="Text" value="{townname1}" />
+
+							<!--District Name-->
+							<m:Label id="Districtnamelabel" text="{i18n>lbl.DistrictName}" />
+							<m:Input id="DistrictNameinput" type="Text" value="{districtname1}" />
+
+							<!--Country-->
+							<m:Label id="Countrylabel" text="{i18n>lbl.Country}" />
+							<m:Input id="Countryinput" type="Text" value="{Countryname1}" />
+
+
 							<!--Addenda Information-->
 							<m:Label id="descriptionLabel" text="{i18n>lbl.description}" required="true"/>
-							<m:Input id="descriptionInput" value="{Description}"/>
+							<m:Input id="descriptionInput" value="{Description1}"/>
 							
+							<!--Purpose-->
+							<!-- <m:Label  id="purposeLabel1" text="{i18n>lbl.purpose}" />
+							<m:Input id="inputpurpose" value="{Purpose1}"/> -->
+							<!--Purpose-->
+							<m:Label  id="purposeLabel1" text="{i18n>lbl.purpose}" />
+    <m:Select id="dropdown" selectedKey="{/selectedOption}" change="onSelectionChange">
+      <m:items>
+        <core:Item id="core1" key="Opción 1" text="Opción 1"/>
+        <core:Item id="core2" key="Opción 2" text="Opción 2"/>
+        <core:Item id="core3" key="Opción 3" text="Opción 3"/>
+      </m:items>
+    </m:Select>
+  
+
 							<!--Instruction ACC-->
 							<m:Label id="description1Label" text="{i18n>lbl.description1}"/>
 							<m:Input id="description1Input" value="{Description}"/>
@@ -239,8 +326,81 @@ L="1" columnsM="1">
 					</ObjectPageSubSection>					
 				</subSections>
 			</ObjectPageSection>
-		</sections>
+		
+		
+<ObjectPageSection id="section8" title="Remitance Info">
+				<subSections>
+					<ObjectPageSubSection id="sub3">
+					  <blocks>
+						<m:VBox id="vbox5" class="sapUiSmallMargin">
+							<form:SimpleForm id="controlForm2" editable="true"
+                             layout="ResponsiveGridLayout" 
+                             labelSpanXL="3" labelSpanL="3" labelSpanM="3" 
+                             adjustLabelSpan="false"
+                              emptySpanXL="4" emptySpanL="4" emptySpanM="4" 
+                              emptySpanS="0" columnsXL="1" 
+                              columnsL="1" 
+                              columnsM="1" 
+                              singleContainerFullSize="false"
+							  >
+						<form:content>	
+						
+	<m:VBox id="vboxx">
+  <!-- Botones para Agregar y Eliminar -->
+  <m:HBox id="hbox33" justifyContent="Center">
+    <m:Button id="button1" text="Agregar" press="onAdd" />
+    <m:Button id="button2" text="Eliminar" press="onDelete" enabled="{= !${/selectedItems}.length > 0 }" />
+  </m:HBox>
+
+  <m:VBox id="inputBox" visible="true">
+    <m:Label id="label1" text="Descrip.Tipo Info Pago Adicional" />
+    <m:Input id="inputName" placeholder="Ingrese Descrip.Tipo Info Pago Adicional" />
+    <m:Label id="label3" text="Info Adicional de Pago" />
+    <m:Input id="inputAge" placeholder="Ingrese Info Adicional de Pago" />
+  </m:VBox>
+
+  <!-- Tabla para mostrar los datos -->
+  <m:Table
+    id="myTable"
+    items="{/items}"
+    selectionChange="onSelectionChange">
+
+    <!-- Checkbox para seleccionar todos -->
+    <m:columns>
+      <m:Column id="column1">
+        <m:CheckBox id="selectAllCheckbox" select="onSelectAll" />
+      </m:Column>
+      <m:Column id="column4">
+        <m:Text id="text40" text="Descrip.Tipo Informacion Pago Adicional" />
+      </m:Column>
+      <m:Column id="column2">
+        <m:Text id="text33" text="Información Adicional de Pago" />
+      </m:Column>
+    </m:columns>
+
+    <!-- Definición de los elementos de la tabla -->
+    <m:items>
+      <m:ColumnListItem id="column3">
+        <m:cells>
+          <!-- Checkbox para seleccionar el item -->
+          <m:CheckBox id="check2" selected="{selected}" select="onCheckboxSelect" />
+          <m:Text id="text1" text="{id}" />
+          <m:Text id="text2" text="{name}" />
+          <m:Text id="text3" text="{age}" />
+        </m:cells>
+      </m:ColumnListItem>
+    </m:items>
+  </m:Table>
+</m:VBox>
+
+</form:content>
+					    </form:SimpleForm>	
+						</m:VBox>                                	
+    				  </blocks>					  
+					</ObjectPageSubSection>										
+				</subSections>				
+			</ObjectPageSection>
+			</sections>
 	</ObjectPageLayout>	
-	
 
 </mvc:View>

@@ -9,20 +9,34 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("zbsp.bz.zbspcreatetransfer.controller.MenuNewACH", {
-        
-        _handlePartnerValueHelp : function(oEvent) {
-            var sInputValue = oEvent.getSource().getValue();
+        //Original
+        // _handlePartnerValueHelp : function(oEvent) {
+        //     var sInputValue = oEvent.getSource().getValue();
     
-            this.inputId = oEvent.getSource().getId();
-            // create value help dialog
-            if (!this._partnerHelpDialog) {
-              this._partnerHelpDialog = sap.ui.xmlfragment(
-                  "zbsp.bz.zbspcreatetransfer.view.SelectPartnerDialog", this);
-              this.getView().addDependent(this._partnerHelpDialog);
-            }
-            // open value help dialog filtered by the input value
-            this._partnerHelpDialog.open();
-          },
+        //     this.inputId = oEvent.getSource().getId();
+        //     // create value help dialog
+        //     if (!this._partnerHelpDialog) {
+        //       this._partnerHelpDialog = sap.ui.xmlfragment(
+        //           "zbsp.bz.zbspcreatetransfer.view.SelectPartnerDialog", this);
+        //       this.getView().addDependent(this._partnerHelpDialog);
+        //     }
+        //     // open value help dialog filtered by the input value
+        //     this._partnerHelpDialog.open();
+        //   },
+
+        _handlePartnerValueHelp : function(oEvent) {
+          var sInputValue = oEvent.getSource().getValue();
+  
+          this.inputId = oEvent.getSource().getId();
+          // create value help dialog
+          if (!this._partnerHelpDialog) {
+            this._partnerHelpDialog = sap.ui.xmlfragment(
+                "zbsp.bz.zbspcreatetransfer.view.SelectPartnerDialog", this);
+            this.getView().addDependent(this._partnerHelpDialog);
+          }
+          // open value help dialog filtered by the input value
+          this._partnerHelpDialog.open();
+        },
           _handlePartnerValueHelpSearch : function (evt) {
 
             var searchType = sap.ui.getCore().byId("idTypeSelect").getSelectedKey();
