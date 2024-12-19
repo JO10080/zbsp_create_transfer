@@ -11,17 +11,17 @@ sap.ui.define([
     onInit: function () {
       var oDataForm = {
         amount: "123",
-        chargeType:"BEN",
-        currency:"USD",
-        description:"Info Test",
-        orderAddress:"Belize",
-        partnerAccount:"2110006054",
-        partnerIdNumber:"4000053",
-        partnerName:"BELIZE CITY COUNCIL",
-        recipientAccountId:"20099884389",
-        recipientAddress:"Honduras",
-        recipientName:"Marvin",
-        transactionReference:"ref12345"
+        chargeType: "BEN",
+        currency: "USD",
+        description: "Info Test",
+        orderAddress: "Belize",
+        partnerAccount: "2110006054",
+        partnerIdNumber: "4000053",
+        partnerName: "BELIZE CITY COUNCIL",
+        recipientAccountId: "20099884389",
+        recipientAddress: "Honduras",
+        recipientName: "Marvin",
+        transactionReference: "ref12345"
       };
       var oDataFormModel = new JSONModel(oDataForm);
       this.getView().setModel(oDataFormModel, "formData");
@@ -142,17 +142,50 @@ sap.ui.define([
       debugger;
       let oDataForm = this.getView().getModel("formData").getData();
       oDataForm.typeCode = 'RTGS';
-      oDataForm.IntermediaryBankKey = this.getVIew().getModel().getProperty("/IntermediaryBankKey");
-      let oPostObject = {
-        "Id": `${Date.now()}${String(Math.floor(Math.random() * 1000000)).padStart(6, '0')}`,
-        "Uuid": crypto.randomUUID(),
-        "SenderBusinessSystemId": "FIORI",
-        "RecipientBusinessSystemId": "PE",
-        "ContentTypeCode": "BAPE_IN_PAYMREQ_FIORI"
-      };
 
+      oDataForm.IntermediaryBankKey = this.getView().byId("recipientBank1Input").getValue();
       var xmlString = XmlHelper.createPaymentRequestXML(oDataForm);
       console.log(xmlString);
-    }
+
+      let oPostObject = {
+        "Id": `${Date.now()}${String(Math.floor(Math.random() * 1000000)).padStart(6, '0')}`,
+        "Uuid": crypto.randomUUID().replace(/-/g, '').substring(0, 16),
+        // "Uuid": `${Date.now()}${String(Math.floor(Math.random() * 1000000)).padStart(6, '0')}`,
+        "SenderBusinessSystemId": "FIORI",
+        "RecipientBusinessSystemId": "PE",
+        "ContentTypeCode": "BAPE_IN_PAYMREQ_FIORI",
+        "ContentText": this._encodeXMLToBase64(xmlString)
+      };
+
+
+      // Obtener el modelo OData
+      let oModel = this.getView().getModel("createPayment");
+
+      // Llamada al endpoint OData para enviar los datos
+      oModel.create("/FreeMessageResponseSet", oPostObject, {
+        success: function (oData, response) {
+          sap.m.MessageBox.success(this.getView().getModel("i18n").getResourceBundle().getText("saveSuccessMessage", [oData ? oData.ContentText : '']), {
+            title: this.getView().getModel("i18n").getResourceBundle().getText("successTitle"),
+            onClose: function () {
+              console.log("El usuario cerró el cuadro de diálogo de éxito.");
+            }
+          });
+        }.bind(this),
+        error: function (oError) {
+          sap.m.MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("saveErrorMessage"), {
+            title: this.getView().getModel("i18n").getResourceBundle().getText("errorTitle"),
+            details: oError.responseText // Detalles adicionales del error
+          });
+        }.bind(this)
+      });
+    },
+
+    _encodeXMLToBase64: function(xmlContent) {
+      const encoder = new TextEncoder();
+      const encodedData = encoder.encode(xmlContent);
+      const base64String = btoa(String.fromCharCode(...encodedData));
+      return base64String;
+  }
+
   });
 });

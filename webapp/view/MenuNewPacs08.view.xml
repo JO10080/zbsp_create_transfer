@@ -333,7 +333,7 @@ Swift 103 Transfer;
                                         />
                                         <m:Input
                                             id="beneCountryInput"
-                                            value="{formData>/beneCountry}"
+                                            value="{formData>/recipientCountry}"
                                             showValueHelp="true"
                                             valueHelpRequest="handleCountyValueHelp"
                                         />

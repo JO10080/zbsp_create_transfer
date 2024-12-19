@@ -61,7 +61,9 @@ sap.ui.define([], function() {
 
             const bank = doc.createElement("Bank");
             // bank.appendChild(this.createElementWithText(doc, "BankCode", "0002"));
-            bank.appendChild(this.createElementWithText(doc, "BICFI", oData.IntermediaryBankKey));
+            if (oData.IntermediaryBankKey) {                
+                bank.appendChild(this.createElementWithText(doc, "BICFI", oData.IntermediaryBankKey));
+            }
             receiverAccount.appendChild(bank);
 
             const account = doc.createElement("Account");
@@ -78,7 +80,7 @@ sap.ui.define([], function() {
             // receiverDetails.appendChild(this.createElementWithText(doc, "ID", "HN12345678"));
             // receiverDetails.appendChild(this.createElementWithText(doc, "Note", "Test Transfer JV"));           //???
             receiverDetails.appendChild(this.createAddressDetails(doc, oData));
-            receiverDetails.appendChild(this.createContactDetails(doc, oData));
+            // receiverDetails.appendChild(this.createContactDetails(doc, oData));
             return receiverDetails;
         },
 
@@ -90,11 +92,11 @@ sap.ui.define([], function() {
             return addressDetails;
         },
 
-        createContactDetails: function(doc) {
-            const contactDetails = doc.createElement("ContactDetails");
-            contactDetails.appendChild(this.createElementWithText(doc, "Email", "juan-jose.penella@sapfioneer.com"));
-            contactDetails.appendChild(this.createElementWithText(doc, "TelephoneNumber", "+34654998877"));
-            return contactDetails;
+        createContactDetails: function(doc, oData) {
+            // const contactDetails = doc.createElement("ContactDetails");
+            // contactDetails.appendChild(this.createElementWithText(doc, "Email", "juan-jose.penella@sapfioneer.com"));
+            // contactDetails.appendChild(this.createElementWithText(doc, "TelephoneNumber", "+34654998877"));
+            // return contactDetails;
         },
         
         createElementWithText: function(doc, tagName, textContent, attributes = {}) {
