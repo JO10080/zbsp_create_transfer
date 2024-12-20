@@ -9,20 +9,47 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("zbsp.bz.zbspcreatetransfer.controller.MenuNewIFT", {
+    //original
+        // _handlePartnerValueHelp : function(oEvent) {
+        //     var sInputValue = oEvent.getSource().getValue();
     
-        _handlePartnerValueHelp : function(oEvent) {
-            var sInputValue = oEvent.getSource().getValue();
-    
-            this.inputId = oEvent.getSource().getId();
-            // create value help dialog
-            if (!this._partnerHelpDialog) {
-              this._partnerHelpDialog = sap.ui.xmlfragment(
-                  "zbsp.bz.zbspcreatetransfer.view.SelectPartnerDialog", this);
-              this.getView().addDependent(this._partnerHelpDialog);
-            }
-            // open value help dialog filtered by the input value
+        //     this.inputId = oEvent.getSource().getId();
+        //     // create value help dialog
+        //     if (!this._partnerHelpDialog) {
+        //       this._partnerHelpDialog = sap.ui.xmlfragment(
+        //           "zbsp.bz.zbspcreatetransfer.view.SelectPartnerDialog", this);
+        //       this.getView().addDependent(this._partnerHelpDialog);
+        //     }
+        //     // open value help dialog filtered by the input value
+        //     this._partnerHelpDialog.open();
+        //   },
+
+        _handlePartnerValueHelp: function(oEvent) {
+          var sInputValue = oEvent.getSource().getValue();
+        
+          this.inputId = oEvent.getSource().getId();
+          
+          // Verificar si el fragmento ya ha sido creado
+          if (!this._partnerHelpDialog) {
+            // Crear y cargar el fragmento de diálogo
+            this._partnerHelpDialog = sap.ui.xmlfragment(
+              "zbsp.bz.zbspcreatetransfer.view.SelectPartnerDialog", 
+              this
+            );
+            
+            // Asegurarse de que el fragmento se añada como dependiente del view
+            this.getView().addDependent(this._partnerHelpDialog);
+          }
+        
+          // Verificar que el fragmento tiene el método open
+          if (this._partnerHelpDialog && typeof this._partnerHelpDialog.open === "function") {
+            // Abrir el diálogo
             this._partnerHelpDialog.open();
-          },
+          } else {
+            // En caso de que el diálogo no tenga el método open, mostrar un error
+            console.error("El diálogo no tiene el método open o no se cargó correctamente.");
+          }
+        },
           _handlePartnerValueHelpSearch : function (evt) {
 
             var searchType = sap.ui.getCore().byId("idTypeSelect").getSelectedKey();
