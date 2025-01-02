@@ -12,138 +12,105 @@ xmlns:form="sap.ui.layout.form"
 xmlns:l="sap.ui.layout"
 xmlns:semantic="sap.m.semantic"
 controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewIncoming">
-	<ObjectPageLayout id="ObjectPageLayout2" showTitleInHeaderContent="false" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="false" isChildPage="true" upperCaseAnchorBar="false" busy="{detailView>/busy}">
+	<ObjectPageLayout id="ObjectPageLayout1_inc" showTitleInHeaderContent="false" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="false" isChildPage="true" upperCaseAnchorBar="false" busy="{detailView>/busy}">
 				<headerTitle>
-					 <ObjectPageHeader id="header" objectTitle="{detailView>/objectTypeName}" isObjectIconAlwaysVisible="false" isObjectTitleAlwaysVisible="true" isObjectSubtitleAlwaysVisible="false">
+					 <ObjectPageHeader id="img" objectImageURI="./test-resources/sap/uxap/images/imageID_275314.png" objectTitle="{detailView>/objectTypeName}" isObjectIconAlwaysVisible="false" isObjectTitleAlwaysVisible="true" isObjectSubtitleAlwaysVisible="false">
 						<actions>					
-							<ObjectPageHeaderActionButton id="btnSave1" hideText="false" text="{i18n>btn.save}" icon="sap-icon://complete" press="handleSave"/>
-							<ObjectPageHeaderActionButton id="header2" hideIcon="true" hideText="false" text="{i18n>btn.cancel}" press="handleCancel"/>
+							<ObjectPageHeaderActionButton id="btnSave_inc" hideText="false" text="{i18n>btn.save}" icon="sap-icon://complete" press="handleSave"/>
+							<ObjectPageHeaderActionButton id="btnCancel_inc" hideIcon="true" hideText="false" text="{i18n>btn.cancel}" press="handleCancel"/>
 						</actions>
 		
 					</ObjectPageHeader>
 				</headerTitle>
 				
 		<sections>
-			<ObjectPageSection id="section3" title="{i18n>xtit.generalInfo}">
+			<ObjectPageSection id="generalInfoSection_inc" title="{i18n>xtit.generalInfo}">
 				<subSections>
-					<ObjectPageSubSection id="section4">
+					<ObjectPageSubSection id="generalInfoSubSection_inc">
 						<blocks>
-							<m:VBox id="vbox4" class="sapUiSmallMargin">
-							 <form:SimpleForm id="recipientForm2" 
-                             editable="true"
-                              layout="ResponsiveGridLayout" 
-                             labelSpanXL="3" 
-                             labelSpanL="3"
-                              labelSpanM="3"
-                              adjustLabelSpan="false"
-                               emptySpanXL="4" 
-                              emptySpanL="4"
-                               emptySpanM="4" emptySpanS="0" 
-                              columnsXL="1" 
-                             columnsL="1" columnsM="1" singleContainerFullSize="false"
-							 binding="{/PaymentOrderSet('1')}">
+							<m:VBox id="generalInfoVBox_inc" class="sapUiSmallMargin">
+							 <form:SimpleForm id="recipientForm_inc" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
 								 <form:content>				
 									<!-- Reference -->
-									<m:Label id="transactionReferenceLabel2" text="{i18n>lbl.transactionReference}" required="true"/>
-									<m:Input id="transactionReferenceInput2" type="Text" change="onInputChange" />
+									<m:Label id="transactionReferenceLabel_inc" text="{i18n>lbl.transactionReference}" required="true"/>
+									<m:Input id="transactionReferenceInput_inc" type="Text" change="onInputChange" />
 									<!-- Account -->
-									<m:Label id="accountIdLabel2" text="{i18n>lbl.recipientAccountId2}" required="true"/>
-									<m:Input id="accountIdInput2" type="Text" change="onInputChange"/>
+									<m:Label id="accountIdLabel_inc" text="{i18n>lbl.recipientAccountId2}" required="true"/>
+									<m:Input id="accountIdInput_inc" type="Text" change="onInputChange"/>
 									<!-- Name -->
-									<m:Label id="orderNameLabel" text="{i18n>lbl.orderName2}" required="true"/>
-									<m:Input id="orderNameInput" type="Text"/>
+									<m:Label id="orderNameLabel_inc" text="{i18n>lbl.orderName2}" required="true"/>
+									<m:Input id="orderNameInput_inc" type="Text"/>
 									<!-- Address -->
-									<m:Label id="orderAddressLabel2" text="{i18n>lbl.orderAddress2}" required="true"/>
-									<m:Input id="orderAddressInput2" type="Text"/>
+									<m:Label id="orderAddressLabel_inc" text="{i18n>lbl.orderAddress2}" required="true"/>
+									<m:Input id="orderAddressInput_inc" type="Text"/>
 									<!-- Institution Bank Name -->
-									<m:Label id="orderBankNameLabel" text="{i18n>lbl.BankName2}" required="true"/>
-									<m:Input id="orderBankNameInput" type="Text" />
+									<m:Label id="orderBankNameLabel_inc" text="{i18n>lbl.BankName2}" required="true"/>
+									<m:Input id="orderBankNameInput_inc" type="Text" />
 									<!--BankBic-->
-									<m:Label id="Labelorderbic" text="{i18n>lbl.intermediaryBankInput2}"/>
+									<m:Label id="Labelorderbic_inc" text="{i18n>lbl.intermediaryBankInput2}"/>
 									<!--
 									<sf:SmartLabel labelFor="orderBic" text="{i18n>lbl.intermediaryBankInput2}"/>
 									-->
-									<sf:SmartField id="orderBic" value="{RecipientBankKey}"/>
-									<!-- Origin Country&nbsp;
+									<sf:SmartField id="orderBic_inc" value="{RecipientBankKey}"/>
+									<!-- Origin Country
 									<m:Label id="origCountyLabel" text="{i18n>lbl.origCounty}" required="false"/>
 									<m:ComboBox id="origCountyInput" items="{/PaicesSet}">
 										<core:Item text="{landx}" key="{land1}"/>
 									</m:ComboBox>
 									-->
-									<m:Label id="fxorigCountyLabel" text="{i18n>lbl.origCounty}" required="false"/>
-									<m:Input id="fxorigCountyInput" value="{land1}" showValueHelp="true" valueHelpRequest="handleCountyValueHelp"/>
+									<m:Label id="fxorigCountyLabel_inc" text="{i18n>lbl.origCounty}" required="false"/>
+									<m:Input id="fxorigCountyInput_inc" value="{land1}" showValueHelp="true" valueHelpRequest="handleCountyValueHelp"/>
 									
 									<!--
 									<m:Input id="origCountyInput" type="Text" suggestionItems="{/Paices}">
 									-->
 									<!-- Bank Address -->
-									<m:Label id="orderBankAddressLabel" text="{i18n>lbl.BankAddress2}" required="true"/>
-									<m:Input id="orderBankAddressInput" type="Text"/>
+									<m:Label id="orderBankAddressLabel_inc" text="{i18n>lbl.BankAddress2}" required="true"/>
+									<m:Input id="orderBankAddressInput_inc" type="Text"/>
 									<!--Transfer amount -->
-									<m:Label id="amountLabel2" text="{i18n>lbl.partnerAmount}" required="true"/>
-									<m:Input id="amountInput2"
+									<m:Label id="amountLabel_inc" text="{i18n>lbl.partnerAmount}" required="true"/>
+									<m:Input id="amountInput_inc"
 										change="onNumberChange"
 										type="Number"
 										textAlign="Right"						
 										valueStateText="{i18n>ymsg.errorAmount}"/>
 									<!-- Currency -->
-									<m:ComboBox   id="currencyBox1"
-                                     items="{       
-                                     path: '/CurrencySet', 
-                                     filters: [{    
-                                     path: 'TransactionTypeCode',                       
-                                     operator: 'BT',                       
-                                     value1: '07'           
-                                        }]           
-                                         }" 
-                                    valueStateText="{i18n>ymsg.errorCurrency}" 
-                                    required="true">
-										<core:Item id="currencyItem1" key="{Id}" text="{Name}"/>
+									<m:ComboBox id="currencyBox_inc" items="{           
+									  path: '/CurrencySet',                      
+									       filters: [{    
+										      path: 'TransactionTypeCode',                   
+											      operator: 'BT',       
+									 value1: '07'
+								 }]            }" valueStateText="{i18n>ymsg.errorCurrency}" required="true">
+										<core:Item id="currencyItem_inc" key="{Id}" text="{Name}"/>
 									</m:ComboBox>
 									<!-- CBB -->
-									<m:Label id="fxItemTypeLabel" text="{i18n>lbl.itemTypeCode}" required="true"/>
-									<m:Input id="fxItemTypeCodeInput" value="{TypeCode}" showValueHelp="true" valueHelpRequest="handleItemTypeValueHelp"/>
+									<m:Label id="fxItemTypeLabel_inc" text="{i18n>lbl.itemTypeCode}" required="true"/>
+									<m:Input id="fxItemTypeCodeInput_inc" value="{TypeCode}" showValueHelp="true" valueHelpRequest="handleItemTypeValueHelp"/>
 									
 								</form:content>
 							  </form:SimpleForm>
-				       		 </m:VBox>
+							 </m:VBox>
 						</blocks>
 					</ObjectPageSubSection>
 				</subSections>
 			</ObjectPageSection>
 
-			<ObjectPageSection id="section5" title="{i18n>xtit.benefInfo}">
+			<ObjectPageSection id="benefInfoSection_inc" title="{i18n>xtit.benefInfo}">
 				<subSections>
-					<ObjectPageSubSection id="subsection">
+					<ObjectPageSubSection id="benefInfoSubSection_inc">
 					  <blocks>
-						<m:VBox id="vbox6" class="sapUiSmallMargin">
-							<form:SimpleForm id="generalInformationForm1"
-                             editable="true" 
-                             layout="ResponsiveGridLayout" 
-                             labelSpanXL="3" 
-                             labelSpanL="3" 
-                             labelSpanM="3" 
-                             adjustLabelSpan="false" 
-                             emptySpanXL="4" 
-                             emptySpanL="4" 
-                             emptySpanM="4" 
-                             emptySpanS="0" 
-                             columnsXL="1" 
-                             columnsL="1" 
-                             columnsM="1" 
-                             singleContainerFullSize="false"
-							 binding="{/PaymentOrderSet('1')}">
+						<m:VBox id="benefInfoVBox_inc" class="sapUiSmallMargin">
+							<form:SimpleForm id="generalInformationForm_inc" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
 						<form:content>	
 							
 							<!-- Business Partner Num. and Name-->
-							<m:Label id="partnerIdLabel1" text="{i18n>lbl.partnerIdNumber}" required="true"/>
-							<m:Input id="partnerIdInput1" type="Text" change="onInputChange" showValueHelp="true"
-							 valueHelpRequest="_handlePartnerValueHelp" 
-							 valueStateText="{i18n>ymsg.errorPartner}" maxLength="10"/>
-							<m:Text id="partnerNameInput1" text="{PartnerName}"/>
+							<m:Label id="partnerIdLabel_inc" text="{i18n>lbl.partnerIdNumber}" required="true"/>
+							<m:Input id="partnerIdInput_inc" type="Text" change="onInputChange" showValueHelp="true" valueHelpRequest="_handlePartnerValueHelp" valueStateText="{i18n>ymsg.errorPartner}" maxLength="10"/>
+							<m:Text id="partnerNameInput_inc" text="{PartnerName}"/>
 							<!-- Cuenta-->
-							<m:Label id="partnerAccountIdLabel" text="{i18n>lbl.partnerAccount}" required="true"/>
-							<m:Input id="partnerAccountIdInput"
+							<m:Label id="partnerAccountIdLabel_inc" text="{i18n>lbl.partnerAccount}" required="true"/>
+							<m:Input id="partnerAccountIdInput_inc"
 								type="Text"
 								change="onInputChange"
 								value="{/AccountSet}"
@@ -152,68 +119,53 @@ controllerName="zbsp.bz.zbspcreatetransfer.controller.MenuNewIncoming">
 								valueStateText="{i18n>ymsg.errorAccount}"
 								maxLength="34"/>
 							<!-- Address -->
-							<m:Label id="partnerAddressLabel" text="{i18n>lbl.orderAddress}" required="true"/>
-							<m:Input id="partnerAddressInput" type="Text"/>
+							<m:Label id="partnerAddressLabel_inc" text="{i18n>lbl.orderAddress}" required="true"/>
+							<m:Input id="partnerAddressInput_inc" type="Text"/>
 							
 							</form:content>
-					    </form:SimpleForm>	
+						</form:SimpleForm>	
 						</m:VBox>                                	
-    				  </blocks>
+					</blocks>
 					</ObjectPageSubSection>					
 				</subSections>
 			</ObjectPageSection>
-			<ObjectPageSection id="section6" title="{i18n>xtit.controlInfo}">
+			<ObjectPageSection id="controlInfoSection_inc" title="{i18n>xtit.controlInfo}">
 				<subSections>
-					<ObjectPageSubSection id="subsection4">
+					<ObjectPageSubSection id="controlInfoSubSection_inc">
 					  <blocks>
-						<m:VBox id="vbox7" class="sapUiSmallMargin">
-							<form:SimpleForm id="controlForm1" 
-                            editable="true" 
-                            layout="ResponsiveGridLayout" 
-                            labelSpanXL="3" 
-                            labelSpanL="3" 
-                            labelSpanM="3" 
-                            adjustLabelSpan="false" 
-                            emptySpanXL="4" 
-                            emptySpanL="4" 
-                            emptySpanM="4"
-                             emptySpanS="0" 
-                             columnsXL="1" 
-                             columnsL="1" 
-                             columnsM="1" 
-                             singleContainerFullSize="false"
-							 binding="{/PaymentOrderSet('1')}">
+						<m:VBox id="controlInfoVBox_inc" class="sapUiSmallMargin">
+							<form:SimpleForm id="controlForm_inc" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
 						<form:content>	
 
 							
-							<m:Label id="symCuentaLabel" text="{i18n>lbl.clearingAggrement}" required="true"/>
-							<m:ComboBox id="symCuentaBox" items="{/SymCuentaSet}">
-							<core:Item id="coreitem" text="{Name}" key="{Id}"/>
+							<m:Label id="symCuentaLabel_inc" text="{i18n>lbl.clearingAggrement}" required="true"/>
+							<m:ComboBox id="symCuentaBox_inc" items="{/SymCuentaSet}">
+							<core:Item id="symCuentaItem_inc" text="{Name}" key="{Id}"/>
 							</m:ComboBox>
-						    <!--
-						    <m:CheckBox id="invEsp" text="{i18n>lbl.invEsp}" selected="false" enabled="true"/>
-						    -->
-						    <!--BankBic combo-->
-							<m:Label id="smart2" labelFor="intermediaryBankInput" text="{i18n>lbl.intermediaryBankInput}"/>
-							<sf:SmartField id="intermediaryBankInput1" value="{IntermediaryBankKey}"/>
+							<!--
+							<m:CheckBox id="invEsp_inc" text="{i18n>lbl.invEsp}" selected="false" enabled="true"/>
+							-->
+							<!--BankBic combo-->
+							<m:Label id="intermediaryBankLabel_inc" labelFor="intermediaryBankInput_inc" text="{i18n>lbl.intermediaryBankInput}"/>
+							<sf:SmartField id="intermediaryBankInput_inc" value="{IntermediaryBankKey}"/>
 							
 							<!--Intermediary ABA/Routing Account-->
-							<m:Label id="instituteNameLabel1" text="{i18n>lbl.instituteNameLabel}"/>
-							<m:Input id="instituteNameInput1" type="Text" />
+							<m:Label id="instituteNameLabel_inc" text="{i18n>lbl.instituteNameLabel}"/>
+							<m:Input id="instituteNameInput_inc" type="Text" />
 							<!--Intermediary Address-->
-							<m:Label id="instituteAddr1Label1" text="{i18n>lbl.instituteAddr1Label}"/>
-							<m:Input id="instituteAddr1Input1" type="Text" />	
+							<m:Label id="instituteAddr1Label_inc" text="{i18n>lbl.instituteAddr1Label}"/>
+							<m:Input id="instituteAddr1Input_inc" type="Text" />	
 							<!--Addenda Information-->
-							<m:Label id="descriptionLabel1" text="{i18n>lbl.description}" required="true"/>
-							<m:Input id="descriptionInput1" />
+							<m:Label id="descriptionLabel_inc" text="{i18n>lbl.description}" required="true"/>
+							<m:Input id="descriptionInput_inc" />
 							<!--Instruction REC
-							<m:Label id="description4Label" text="{i18n>lbl.description4}"/>
-							<m:Input id="description4Input" />-->
+							<m:Label id="description4Label_inc" text="{i18n>lbl.description4}"/>
+							<m:Input id="description4Input_inc" />-->
 							
 						</form:content>
-					    </form:SimpleForm>	
+						</form:SimpleForm>	
 						</m:VBox>                                	
-    				  </blocks>
+					</blocks>
 					</ObjectPageSubSection>					
 				</subSections>
 			</ObjectPageSection>

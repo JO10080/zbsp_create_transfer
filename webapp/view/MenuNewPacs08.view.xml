@@ -65,8 +65,9 @@ Swift 103 Transfer;
                     <ObjectPageSubSection id="subsection1">
                         <blocks>
                             <m:VBox
-                                id="vbox"
-                                class="sapUiSmallMargin"
+                                id="vbox"                            								
+    							class="sapUiSmallMargin"
+    							height="100%"
                             >
                                 <form:SimpleForm
                                     id="generalInformationForm"
@@ -95,10 +96,10 @@ Swift 103 Transfer;
 											id="transactionReferenceInput"
 											type="Text"
 											change="onInputChange"
-											value="{formData>/transactionReference}"
+											value="{formData>/ordering/transactionReference}"
 										/>
 										<!--BP Number-->
-										<m:Label
+										 <m:Label
 											id="partnerIdLabel"
 											text="{i18n>lbl.partnerIdNumber}"
 											required="true"
@@ -112,7 +113,7 @@ Swift 103 Transfer;
 											valueStateText="{i18n>ymsg.errorPartner}"
 											maxLength="10"
 											value="{formData>/partnerIdNumber}"
-										/>
+										/> 
 										<!--BP Name-->
 										<m:Text
 											id="partnerNameInput"
@@ -128,14 +129,14 @@ Swift 103 Transfer;
 											id="accountIdInput"
 											type="Text"
 											change="onInputChange"
-											value="{formData>/partnerAccount}"
+											value="{formData>/ordering/partnerAccount}"
 											showValueHelp="true"
 											valueHelpRequest="_handleAccountValueHelp"
 											valueStateText="{i18n>ymsg.errorAccount}"
 											maxLength="34"
 										/>
 										<!--BP Address-->
-										<m:Label
+										<!-- <m:Label
 											id="orderAddressLabel"
 											text="{i18n>lbl.orderAddress}"
 											required="true"
@@ -144,7 +145,7 @@ Swift 103 Transfer;
 											id="orderAddressInput"
 											value="{formData>/orderAddress}"
 											type="Text"
-										/>
+										/> -->
 										<!--Amount-->
 										<m:Label
 											id="amountLabel"
@@ -157,7 +158,7 @@ Swift 103 Transfer;
 											type="Number"
 											textAlign="Right"
 											valueStateText="{i18n>ymsg.errorAmount}"
-											value="{formData>/amount}"
+											value="{formData>/ordering/amount}"
 										/>
 										<!--Currency-->
 										<m:ComboBox
@@ -172,7 +173,7 @@ Swift 103 Transfer;
 											}"
 												valueStateText="{i18n>ymsg.errorCurrency}"
 												required="true"
-												value="{formData>/currency}"
+												value="{formData>/ordering/currency}"
 											>
 											<core:Item
 												id="currencyItem"
@@ -189,7 +190,7 @@ Swift 103 Transfer;
 										<m:Input
 											id="amountFInput"
 											change="onNumberChange"
-											value="{formData>/fileAmount}"
+											value="{formData>/ordering/fileAmount}"
 											type="Number"
 											textAlign="Right"
 											valueStateText="{i18n>ymsg.errorAmount}"
@@ -207,7 +208,7 @@ Swift 103 Transfer;
 												}]
 											}"
 											valueStateText="{i18n>ymsg.errorCurrency}"
-											value="{formData>/fileCurrency}"
+											value="{formData>/ordering/fileCurrency}"
 										>
 											<core:Item
 												id="currencyFItem"
@@ -225,7 +226,7 @@ Swift 103 Transfer;
 										<m:ComboBox
 											id="chargeTypeBox"
 											items="{/ChargeTypeSet}"
-											value="{formData>/chargeType}"
+											value="{formData>/ordering/chargeType}"
 										>
 											<core:Item
 												id="chargeTypeItem"
@@ -235,7 +236,7 @@ Swift 103 Transfer;
 										</m:ComboBox>
 
 										<!--Date-->
-										<m:Label
+										<!-- <m:Label
 											id="customerValueDateLabel"
 											text="{i18n>lbl.customerValueDate}"
 										/>
@@ -243,7 +244,7 @@ Swift 103 Transfer;
 											id="customerValueDateInput"
 											change="onInputChange"
 											value="{path:'formData>/customerValueDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}"
-										/>
+										/> -->
 
 										<!--CBB Permit No-->
 										<!-- Input donde se ingresara el codigo -->
@@ -257,8 +258,10 @@ Swift 103 Transfer;
 											id="inputCode"
 											placeholder="Ingrese un Codigo"
 											liveChange="onCodeChange"
+											type="Text"
 											value="{formData>/cbbPermit}"
 										/>
+
 
 										<!-- Button to add a new row to the table -->
 										<m:Button
@@ -287,17 +290,17 @@ Swift 103 Transfer;
 										<!-- Table to display the data; initially hidden -->
 										<m:Table
 											id="dataTable"
-											width="100%"
 											visible="false"
 											mode="SingleSelect"
 											selectionChange="onSelectionChange"
+											
 										>
 											<m:columns>
 												<m:Column id="column5">
 													<m:Text
 														id="text4"
-														text="Permit No."
-													/>
+														text="Permit No."	
+													/>													
 												</m:Column>
 												<m:Column id="column6">
 													<m:Text
@@ -384,7 +387,7 @@ Swift 103 Transfer;
 											id="recipientNameInput"
 											type="Text"
 											change="onInputChange"
-											value="{formData>/recipientName}"
+											value="{formData>/recipient/recipientName}"
 										/>
 										<!--BankAcco-->
 										<m:Label
@@ -395,9 +398,9 @@ Swift 103 Transfer;
 										<m:Input
 											id="recipientAccountIdInput"
 											type="Text"
-											value="{formData>/recipientAccountId}"
+											value="{formData>/recipient/recipientAccountId}"
 										/>
-										<!--Direccion-->
+										<!-- Direccion
 										<m:Label
 											id="recipientAddressLabel"
 											text="{i18n>lbl.recipientAddress}"
@@ -407,6 +410,89 @@ Swift 103 Transfer;
 											id="recipientAddressInput"
 											type="Text"
 											value="{formData>/recipientAddress}"
+										/> -->
+
+										
+										<!--Intermediary Address-->
+
+										<!--Street Name-->
+										
+										<m:Label
+											id="streetlabel"
+											text="{i18n>lbl.streetNameLabel}"
+										/>
+										<m:Input
+											id="streetinput1"
+											type="Text"
+											value="{formData>/recipient/Address/Street}"
+										/>
+
+										<!--Building Number-->
+										<m:Label
+											id="BuildingNumberlabel"
+											text="{i18n>lbl.BuildingNumber}"
+										/>
+										<m:Input
+											id="BuildingNumberinput"
+											type="Text"
+											value="{formData>/recipient/Address/Building}"
+										/>
+
+										<!--Building Name-->
+										<m:Label
+											id="BuildingNamelabel"
+											text="{i18n>lbl.BuildingName}"
+										/>
+										<m:Input
+											id="BuildingNameinput"
+											type="Text"
+											value="{formData>/recipient/Address/BuildingName}"
+										/>
+
+										<!--Town Name-->
+										<m:Label
+											id="TownNamelabel"
+											text="{i18n>lbl.TownName}"
+										/>
+										<m:Input
+											id="TownNameinput"
+											type="Text"
+											value="{formData>/recipient/Address/TownName}"
+										/>
+
+										<!--District Name-->
+										<m:Label
+											id="Districtnamelabel"
+											text="{i18n>lbl.DistrictName}"
+										/>
+										<m:Input
+											id="DistrictNameinput"
+											type="Text"
+											value="{formData>/recipient/Address/DistrictName}"
+										/>
+
+										<!-- Country
+										<m:Label
+											id="Countrylabel"
+											text="{i18n>lbl.Country}"
+										/>
+										<m:Input
+											id="Countryinput"
+											type="Text"
+											value="{formData>/Countryname1}"
+										/> -->
+
+										<!-- bene Country -->
+										<m:Label
+											id="beneCountyLabel"
+											text="{i18n>lbl.beneCounty}"
+											required="false"
+										/>
+										<m:Input
+											id="beneCountyInput"
+											value="{formData>/recipient/Address/Country}"
+											showValueHelp="true"
+											valueHelpRequest="handleCountyValueHelp"
 										/>
 										<!--BIC-->
 										<m:Label
@@ -418,20 +504,9 @@ Swift 103 Transfer;
 											id="recipientBank1Input"
 											value="{IntermediaryBankKey}"
 										/>
-										<!-- bene Country -->
-										<m:Label
-											id="beneCountyLabel"
-											text="{i18n>lbl.beneCounty}"
-											required="false"
-										/>
-										<m:Input
-											id="beneCountyInput"
-											value="{formData>/beneCounty}"
-											showValueHelp="true"
-											valueHelpRequest="handleCountyValueHelp"
-										/>
+										
 										<!--BankName-->
-										<m:Label
+										<!-- <m:Label
 											id="rcpinstNameLabel"
 											text="{i18n>lbl.BankName}"
 										/>
@@ -439,9 +514,9 @@ Swift 103 Transfer;
 											id="rcpinstNameInput"
 											type="Text"
 											value="{formData>/rcpinstName}"
-										/>
+										/> -->
 										<!--BankAddr-->
-										<m:Label
+										<!-- <m:Label
 											id="rcpinstAddr1Label"
 											text="{i18n>lbl.BankDirecction}"
 										/>
@@ -449,9 +524,9 @@ Swift 103 Transfer;
 											id="rcpinstAddr1Input"
 											type="Text"
 											value="{formData>/rcpinstAddr1}"
-										/>
+										/> -->
 										<!--Cuenta-->
-										<m:Label
+										<!-- <m:Label
 											id="rcpinstAccountLabel"
 											text="{i18n>lbl.BankAccount}"
 										/>
@@ -459,7 +534,7 @@ Swift 103 Transfer;
 											id="rcpinstAccountInput"
 											type="Text"
 											value="{formData>/rcpinstAccount}"
-										/>
+										/> -->
 									</form:content>
                                 </form:SimpleForm>
                             </m:VBox>
@@ -498,7 +573,7 @@ Swift 103 Transfer;
                                 >
 									<form:content>
 										<!--CorrespondentBank-->
-										<m:Label
+										<!-- <m:Label
 											id="smart3"
 											labelFor="clearingAggrementInput"
 											text="{i18n>lbl.clearingAggrement}"
@@ -507,10 +582,10 @@ Swift 103 Transfer;
 											id="clearingAggrementInput"
 											value="{ClearingAgreementId}"
 											visible="{= ${detailView>/objectType} !== '99' ? true : false }"
-										/>
+										/> -->
 
 										<!--BankBic combo-->
-										<m:Label
+										<!-- <m:Label
 											id="label10"
 											labelFor="intermediaryBankInput"
 											text="{i18n>lbl.intermediaryBankInput}"
@@ -518,7 +593,7 @@ Swift 103 Transfer;
 										<sf:SmartField
 											id="intermediaryBankInput"
 											value="{IntermediaryBankKey}"
-										/>
+										/> -->
 
 										<!--Intermediary bank-->
 										<m:Label
@@ -541,73 +616,6 @@ Swift 103 Transfer;
 											value="{formData>/IntermediaryBank}"
 										/>
 
-										<!--Intermediary Address-->
-
-										<!--Street Name-->
-										<m:Label
-											id="streetlabel"
-											text="{i18n>lbl.streetNameLabel}"
-										/>
-										<m:Input
-											id="streetinput1"
-											type="Text"
-											value="{formData>/street1}"
-										/>
-
-										<!--Building Number-->
-										<m:Label
-											id="BuildingNumberlabel"
-											text="{i18n>lbl.BuildingNumber}"
-										/>
-										<m:Input
-											id="BuildingNumberinput"
-											type="Text"
-											value="{formData>/building1}"
-										/>
-
-										<!--Building Name-->
-										<m:Label
-											id="BuildingNamelabel"
-											text="{i18n>lbl.BuildingName}"
-										/>
-										<m:Input
-											id="BuildingNameinput"
-											type="Text"
-											value="{formData>/buildingname1}"
-										/>
-
-										<!--Town Name-->
-										<m:Label
-											id="TownNamelabel"
-											text="{i18n>lbl.TownName}"
-										/>
-										<m:Input
-											id="TownNameinput"
-											type="Text"
-											value="{formData>/townname1}"
-										/>
-
-										<!--District Name-->
-										<m:Label
-											id="Districtnamelabel"
-											text="{i18n>lbl.DistrictName}"
-										/>
-										<m:Input
-											id="DistrictNameinput"
-											type="Text"
-											value="{formData>/districtname1}"
-										/>
-
-										<!--Country-->
-										<m:Label
-											id="Countrylabel"
-											text="{i18n>lbl.Country}"
-										/>
-										<m:Input
-											id="Countryinput"
-											type="Text"
-											value="{formData>/Countryname1}"
-										/>
 
 										<!--Addenda Information-->
 										<m:Label
@@ -617,7 +625,7 @@ Swift 103 Transfer;
 										/>
 										<m:Input
 											id="descriptionInput"
-											value="{formData>/description}"
+											value="{formData>/transactionChain/AddendaInformation}"
 										/>
 
 										<!--Purpose-->
@@ -625,29 +633,16 @@ Swift 103 Transfer;
 											id="purposeLabel1"
 											text="{i18n>lbl.purpose}"
 										/>
-										<m:Select
-											id="dropdown"
-											selectedKey="{/selectedOption}"
-											change="onSelectionChange"
-										>
-											<m:items>
-												<core:Item
-													id="core1"
-													key="Opción 1"
-													text="Opción 1"
-												/>
-												<core:Item
-													id="core2"
-													key="Opción 2"
-													text="Opción 2"
-												/>
-												<core:Item
-													id="core3"
-													key="Opción 3"
-													text="Opción 3"
-												/>
-											</m:items>
-										</m:Select>
+										  <!-- Input normal con un Value Help Icon -->
+   										 <m:Input
+											id="purposeInput"											
+											showValueHelp="true"
+											valueHelpRequest=".onPurposeValueHelp"
+										 > 
+											<!-- <suggestionItems>
+												<core:Item text="{Name}" />
+											</suggestionItems> -->
+										</m:Input>		
 
 										<!--Instruction ACC-->
 										<m:Label
@@ -656,7 +651,7 @@ Swift 103 Transfer;
 										/>
 										<m:Input
 											id="description1Input"
-											value="{formData>/Description}"
+											value="{formData>/transactionChain/TagAcc}"
 										/>
 
 										<!--Instruction BNF-->
@@ -666,7 +661,7 @@ Swift 103 Transfer;
 										/>
 										<m:Input
 											id="description2Input"
-											value="{formData>/Description}"
+											value="{formData>/transactionChain/TagBnf}"
 										/>
 
 										<!--Instruction REC-->
@@ -676,7 +671,7 @@ Swift 103 Transfer;
 										/>
 										<m:Input
 											id="description4Input"
-											value="{formData>/Description}"
+											value="{formData>/transactionChain/TagRec}"
 										/>
 									</form:content>
                                 </form:SimpleForm>

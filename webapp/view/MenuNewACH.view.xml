@@ -8,12 +8,12 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"
 	xmlns:core="sap.ui.core"
-	xmlns:l="sap.ui.layout" 
+	xmlns:l="sap.ui.layout"
 	xmlns:sf="sap.ui.comp.smartfield"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:footerbar="sap.ushell.ui.footerbar">
 	<Page
-		id="page_3"
+		id="page_ach"
 		navButtonPress="onNavBack"
 		showNavButton="{device>/system/phone}"
 		title="{detailView>/objectTypeName}"
@@ -21,7 +21,7 @@
 		busyIndicatorDelay="{detailView>/delay}">
 		<content>		
 			<!-- Form for Product Information -->
-			<f:SimpleForm id="productInformationForm_3" 			    
+			<f:SimpleForm id="productInformationForm_ach" 			
 				editable="true"
 				layout="ResponsiveGridLayout"			
 				labelSpanXL="3"
@@ -37,48 +37,48 @@
 				columnsL="1"
 				columnsM="1"
 				title="{i18n>xtit.generalInfo}">
-				 <f:content>				  
-				 
+				 <f:content>				
+				
 				 <!-- Ordenante / Ordering -->
-				 
-					<Label id="partnerIdLabel_4" text="{i18n>lbl.partnerIdNumber}" required="true"/>
-					<Input id="partnerIdInput_4"
+				
+					<Label id="partnerIdLabel_ach" text="{i18n>lbl.partnerIdNumber}" required="true"/>
+					<Input id="partnerIdInput_ach"
 						type="Text" 					
 						change="onInputChange"						
-						showValueHelp="true" 
+						showValueHelp="true"
 						valueHelpRequest="_handlePartnerValueHelp"
 						valueStateText="{i18n>ymsg.errorPartner}" maxLength="10"/>
-					<Text id="partnerNameInput_4" text="{PartnerName}"/>
+					<Text id="partnerNameInput_ach" text="{PartnerName}"/>
 					
-				    <Label id="accountIdLabel_3" text="{i18n>lbl.partnerAccount}" required="true"/>
-					<Input id="accountIdInput_3"
+					<Label id="accountIdLabel_ach" text="{i18n>lbl.partnerAccount}" required="true"/>
+					<Input id="accountIdInput_ach"
 						type="Text" 						
 						change="onInputChange"
 						value="{path: 'Name'}"
-						showValueHelp="true" 
+						showValueHelp="true"
 						valueHelpRequest="_handleAccountValueHelp"
 						valueStateText="{i18n>ymsg.errorAccount}"
-						maxLength="34"/>			    
+						maxLength="34"/>			
 					
-					<Label id="amountLabel_4" text="{i18n>lbl.partnerAmount}" required="true"/>
-					<Input id="amountInput_4" 
-						change="onNumberChange" 
-						type="Number" 
+					<Label id="amountLabel_ach" text="{i18n>lbl.partnerAmount}" required="true"/>
+					<Input id="amountInput_ach"
+						change="onNumberChange"
+						type="Number"
 						textAlign="Right"						
 						valueStateText="{i18n>ymsg.errorAmount}"/>
-				   
-					<ComboBox id="currencyBox_4"  
-					   
+				
+					<ComboBox id="currencyBox_ach"
+					
 						items="{/CurrencySet}"
 						valueStateText="{i18n>ymsg.errorCurrency}" >
-						<core:Item id="currencyItem_4" key="{Id}" text="{Name}" />
+						<core:Item id="currencyItem_ach" key="{Id}" text="{Name}" />
 					</ComboBox>	
 					
-					<Label id="addendaInformationLabel" text="{i18n>lbl.description}" required="true"/>
-					<Input id="addendaInformationInput_3" type="Text" change="onInputChange" />
+					<Label id="addendaInformationLabel_ach" text="{i18n>lbl.description}" required="true"/>
+					<Input id="addendaInformationInput_ach" type="Text" change="onInputChange" />
 					
-					<Label id="destinationBankLabel_3" text="{i18n>lbl.destinationBank}" required="true"/>
-					<Input id="destinationBankInput_3" type="Text" change="onInputChange" />
+					<Label id="destinationBankLabel_ach" text="{i18n>lbl.destinationBank}" required="true"/>
+					<Input id="destinationBankInput_ach" type="Text" change="onInputChange" />
 					
 					<!--
 					<Label id="descriptionLabel" text="{i18n>lbl.descriptiona}"/>
@@ -88,15 +88,15 @@
 					<!--
 					<Label id="customerValueDateLabel" text="Fecha valor del cliente" />
 					<DatePicker id="customerValueDateInput"  change="onInputChange" visible="false"
-					     value="{path:'masterView>/defaultDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}" />					
+						 value="{path:'masterView>/defaultDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}" />					
 					-->
 					
 				</f:content>
-			</f:SimpleForm> 
+			</f:SimpleForm>
 			
-			<!-- Destinatario / Recipient --> 
+			<!-- Destinatario / Recipient -->
 			
-			<f:SimpleForm  id="recipientForm_3"
+			<f:SimpleForm  id="recipientForm_ach"
 								editable="true"
 								layout="ResponsiveGridLayout"						
 								labelSpanXL="3"
@@ -112,25 +112,25 @@
 								columnsM="1"
 								singleContainerFullSize="false"
 									title="{i18n>xtit.benefInfo}">
-				<f:content>				    
-					<Label id="recipientNameLabel_3" text="{i18n>lbl.recipientName}" required="true"/>
-					<Input id="recipientNameInput_3" type="Text" change="onInputChange" />
+				<f:content>				
+					<Label id="recipientNameLabel_ach" text="{i18n>lbl.recipientName}" required="true"/>
+					<Input id="recipientNameInput_ach" type="Text" change="onInputChange" />
 					
 					<!--
 					<Label id="recipientIdLabel" text="{i18n>lbl.recipientId}" required="{= ${detailView>/objectType} === '01' ? true : false }"/>
-					<Input id="recipientIdInput" 
-						change="onNumberChange" type="Number" textAlign="Left" />				   
+					<Input id="recipientIdInput"
+						change="onNumberChange" type="Number" textAlign="Left" />				
 					<ComboBox id="recipientIdTypeBox"
-						items="{/IdentificationTypeSet}" 
+						items="{/IdentificationTypeSet}"
 						visible="{= ${detailView>/objectType} === '01' ? true : false }">
 						<core:Item id="idTypeItem" key="{Id}" text="{Name}" />
 					</ComboBox>
 					-->
-					<Label id="recipientAccTypeLabel_3" text="{i18n>lbl.recipientAccountId}" required="true"/>
-					<Input id="recipientAccountIdInput_3" type="Text"/>
+					<Label id="recipientAccTypeLabel_ach" text="{i18n>lbl.recipientAccountId}" required="true"/>
+					<Input id="recipientAccountIdInput_ach" type="Text"/>
 					
-					<Label id="recipientAddressLabel_3" text="{i18n>lbl.recipientAddress}"/>
-					<Input id="recipientAddressInput_3" value="{RecipientAddress}" type="Text" />
+					<Label id="recipientAddressLabel_ach" text="{i18n>lbl.recipientAddress}"/>
+					<Input id="recipientAddressInput_ach" value="{RecipientAddress}" type="Text" />
 					
 					<!--
 					<sf:SmartLabel labelFor="recipientBankInput"/>
@@ -138,43 +138,42 @@
 						id="recipientBankInput"
 						visible="{= ${detailView>/objectType} === '03' ? true : false }"
 						value="{RecipientBankKey}">
-				    </sf:SmartField>	-->
-				    
-					<Label id="recipientBankLabel_3"	text="{i18n>lbl.recipientBankId}" required="true"/>					
-					<ComboBox id="recipientBankBox_3"
+					</sf:SmartField>	-->
+				
+					<Label id="recipientBankLabel_ach"	text="{i18n>lbl.recipientBankId}" required="true"/>					
+					<ComboBox id="recipientBankBox_ach"
 						items="{/BankSet}"
 						visible="{= ${detailView>/objectType} !== '03' ? true : false }" >
-						<core:Item id="uniqueid"  key="{Id}" text="{Name}" />
+						<core:Item id="recipientBankItem_ach" key="{Id}" text="{Name}" />
 					</ComboBox>	
 					
 					<!--
 					#combobox eliminado para belize#
 					
-					<ComboBox id="recipientAccTypeBox"  
+					<ComboBox id="recipientAccTypeBox"
 						selectedKey=""
 						items="{ path: '/AccountTypeSet',
-						         filters: [{ path: 'TransactionTypeCode',
-						                     operator: 'BT',
-						                     value1: '01' 
-						                  }] 
-						      }"
+								 filters: [{ path: 'TransactionTypeCode',
+											 operator: 'BT',
+											 value1: '01'
+										  }]}
 						visible="{= ${detailView>/objectType} !== '03' ? true : false }" >
 						<core:Item  key="{Id}" text="{Name}" />
 					</ComboBox>	
 					
 					<Label id="confirmAccountLabel" text="{i18n>lbl.confirmationAccountId}" required="true" />
 					<Input id="confirmAccountInput" type="Text" valueStateText="{detailView>/acctConfirmationErrorText}" maxLength="34"/>
-				    -->
+					-->
 				
 				</f:content>
 			</f:SimpleForm>		
-		</content>      
+		</content>
 		
 		<footer>
-	    	<OverflowToolbar id="footerToolbar_3">
- 				<ToolbarSpacer id="footerBeginSpacer_3"/>			 
-				<Button id="btnSave_4"   text="{i18n>btn.save}" icon="sap-icon://complete" press="handleSave"/>
-				<Button id="btnCancel" text="{i18n>btn.cancel}" press="handleCancel"/>								
+			<OverflowToolbar id="footerToolbar_ach">
+				<ToolbarSpacer id="footerBeginSpacer_ach"/>			
+				<Button id="btnSave_ach"   text="{i18n>btn.save}" icon="sap-icon://complete" press="handleSave"/>
+				<Button id="btnCancel_ach" text="{i18n>btn.cancel}" press="handleCancel"/>								
 				
 			</OverflowToolbar>
 		</footer>

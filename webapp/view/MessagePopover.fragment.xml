@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <MessagePopover id="popover"
+        items="{/MessageSet}"
+        afterClose="onMessagePopoverClose">
+        <MessagePopoverItem id="IDGenMessagePopoverItem"
+            type="{
+                path: 'Severity',
+                formatter: '.formatter.errorType'
+            }"
+            title="{
+                path: 'MessageText'              
+               
+            }"
+            description="{MessageText}">
+        </MessagePopoverItem>
+    </MessagePopover>
+</core:FragmentDefinition>

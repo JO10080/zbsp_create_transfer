@@ -3,56 +3,110 @@ sap.ui.define([
   "sap/ui/model/json/JSONModel",
   "sap/ui/model/Filter",
   "sap/m/MessageToast",
+  "sap/ui/comp/valuehelpdialog/ValueHelpDialog",
+  "sap/ui/core/Fragment",
+  "sap/ui/model/FilterOperator",
   "zbsp/bz/zbspcreatetransfer/utils/XmlHelper"
-], function (Controller, JSONModel, Filter, MessageToast, XmlHelper) {
+], function (Controller, JSONModel, Filter, MessageToast, ValueHelpDialog, Fragment, FilterOperator, XmlHelper) {
   "use strict";
 
   return Controller.extend("zbsp.bz.zbspcreatetransfer.controller.MenuNewPacs08", {
     onInit: function () {
       var oDataForm = {
-        amount: "123",
-        chargeType: "BEN",
-        currency: "USD",
-        description: "Info Test",
-        orderAddress: "Belize",
-        partnerAccount: "2110006054",
-        partnerIdNumber: "4000053",
-        partnerName: "BELIZE CITY COUNCIL",
-        recipientAccountId: "20099884389",
-        recipientAddress: "Honduras",
-        recipientName: "Marvin",
-        transactionReference: "ref12345"
+        ordering:{
+          transactionReference: "ref12345",
+          partnerAccount: "2110006054",
+          amount: "123",
+          currency: "USD",
+          fileAmount: "12345",
+          fileCurrency: "Euro europeo",
+          chargeType: "BEN",
+        },
+        recipient:{
+          recipientName: "Marvin",
+          recipientAccountId: "20099884389",
+          IntermediaryBankKey: "",
+          Address:{
+            DistrictName:"nom distrito", 
+            TownName:"Nom Ciudad", 
+            BuildingName:"Nom Edificio", 
+            Building:"Edificio", 
+            Street:"Calle",
+            Country:""
+          }
+        },
+        transactionChain:{
+          AddendaInformation: "Addenda",
+          TagAcc: "TagAcc",
+          TagBnf: "TagBnf",
+          TagRec: "TagRec",
+        }
+        
+        
+        
+        //description: "Info Test",
+        //orderAddress: "Belize",
+        
+        //partnerIdNumber: "4000053",
+        //partnerName: "BELIZE CITY COUNCIL",
+        
+        //recipientAddress: "Honduras",
+        
+        
+        
       };
+
       var oDataFormModel = new JSONModel(oDataForm);
       this.getView().setModel(oDataFormModel, "formData");
 
             // Crear el modelo de datos para la tabla
-            var oModel = new JSONModel({
-              items: [
-                { id: 1, name: "Pago Adicional 1", age: "30", selected: false },
-                { id: 2, name: "Pago Adicional 2", age: "25", selected: false },
-                { id: 3, name: "Pago Adicional 3", age: "40", selected: false }
-              ],
-              selectedItems: []
-            });
+            // var oModel = new JSONModel({
+            //   items: [
+            //     { id: 1, name: "Pago Adicional 1", age: "30", selected: false },
+            //     { id: 2, name: "Pago Adicional 2", age: "25", selected: false },
+            //     { id: 3, name: "Pago Adicional 3", age: "40", selected: false }
+            //   ],
+            //   selectedItems: []
+            // });
       
             // Asignar el modelo a la vista
-            this.getView().setModel(oModel);
+            // this.getView().setModel(oModel);
 
       // Crear el modelo de datos para la tabla
-      var oModel = new JSONModel({
-        items: [
-          { id: 1, name: "Pago Adicional 1", age: "30", selected: false },
-          { id: 2, name: "Pago Adicional 2", age: "25", selected: false },
-          { id: 3, name: "Pago Adicional 3", age: "40", selected: false }
-        ],
-        selectedItems: []
-      });
+      // var oModel = new JSONModel({
+      //   items: [
+      //     { id: 1, name: "Pago Adicional 1", age: "30", selected: false },
+      //     { id: 2, name: "Pago Adicional 2", age: "25", selected: false },
+      //     { id: 3, name: "Pago Adicional 3", age: "40", selected: false }
+      //   ],
+      //   selectedItems: []
+      // });
 
       // Asignar el modelo a la vista
-      this.getView().setModel(oModel);
+      // this.getView().setModel(oModel);
+
+
+  // Obtener el enrutador
+  var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+ 
+  // Registrar el evento routeMatched
+  oRouter.attachRouteMatched(this.onRouteMatched, this);
+
 
     },
+// Controlador del evento routeMatched
+onRouteMatched: function (oEvent) {
+  var sRouteName = oEvent.getParameter("name"); // Nombre de la ruta
+
+           
+  if (sRouteName === "RouteMenuNewPacs08") {
+    this.getView().getModel("formData").setProperty("/typeCode", 'RTGS');
+} else if (sRouteName === "RouteMenuNewPacs09") {
+  this.getView().getModel("formData").setProperty("/typeCode", 'RTGS9');
+}
+  
+},
+
 
     _handlePartnerValueHelp: function (oEvent) {
       //  const sInputValue = oEvent.getSource().getValue();
@@ -168,9 +222,8 @@ sap.ui.define([
     handleSave: function () {
       debugger;
       let oDataForm = this.getView().getModel("formData").getData();
-      oDataForm.typeCode = 'RTGS';
-
-      oDataForm.IntermediaryBankKey = this.getView().byId("recipientBank1Input").getValue();
+    
+      oDataForm.recipient.IntermediaryBankKey = this.getView().byId("recipientBank1Input").getValue();
       var xmlString = XmlHelper.createPaymentRequestXML(oDataForm);
       console.log(xmlString);
 
@@ -190,14 +243,17 @@ sap.ui.define([
 
       // Llamada al endpoint OData para enviar los datos
       oModel.create("/FreeMessageResponseSet", oPostObject, {
-        success: function (oData, response) {
-          sap.m.MessageBox.success(this.getView().getModel("i18n").getResourceBundle().getText("saveSuccessMessage", [oData ? oData.ContentText : '']), {
-            title: this.getView().getModel("i18n").getResourceBundle().getText("successTitle"),
-            onClose: function () {
-              console.log("El usuario cerró el cuadro de diálogo de éxito.");
-            }
-          });
-        }.bind(this),
+        success: this._successResponse.bind(this),
+
+        // function (oData, response) {
+        //   sap.m.MessageBox.success(this.getView().getModel("i18n").getResourceBundle().getText("saveSuccessMessage",
+        //      [oData ? oData.ContentText : '']), {
+        //     title: this.getView().getModel("i18n").getResourceBundle().getText("successTitle"),
+        //     onClose: function () {
+        //       console.log("El usuario cerró el cuadro de diálogo de éxito.");
+        //     }
+        //   });
+        // }.bind(this),
         error: function (oError) {
           sap.m.MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("saveErrorMessage"), {
             title: this.getView().getModel("i18n").getResourceBundle().getText("errorTitle"),
@@ -296,46 +352,173 @@ sap.ui.define([
     onCodeChange: function (oEvent) {
       var inputValue = oEvent.getParameter("newValue");
 
-      // Llamar al backend ABAP para obtener los datos basados en el código ingresado
-      if (inputValue === "001") {
-        this.loadDataForCode(inputValue);
-      } else {
-        this.clearTable();
-      }
+      
+        // Inicializa el modelo con datos predeterminados
+        var oData = {
+            formData: {
+                cbbPermit: "",   // Código del permiso
+                permitNo: "",
+                amount: "",
+                approvalDate: ""
+            },
+            tableData: [] // Datos de la tabla
+        };
+        var oModel = new JSONModel(oData);
+        this.getView().setModel(oModel);
     },
 
-    loadDataForCode: function (code) {
-      // Aquí se realiza la llamada al backend ABAP (simulada con datos de ejemplo)
-      var data = [
-        {
-          permitNo: "P001",
-          amount: "1000",
-          approvalDate: "2024-12-19"
-        },
-        {
-          permitNo: "P002",
-          amount: "2000",
-          approvalDate: "2024-12-20"
+    // Evento cuando cambia el valor del código en el input
+    onCodeChange: function (oEvent) {
+        var sValue = oEvent.getSource().getValue();
+        var oTable = this.byId("dataTable");
+
+        // Si el valor del código no está vacío, mostrar la tabla
+        if (sValue && sValue.trim() !== "") {
+            oTable.setVisible(true); // Hacer visible la tabla
+            this.byId("button3").setVisible(true); // Hacer visible el botón Add Row
+            this.byId("button4").setVisible(true); // Hacer visible el botón Save Data
+            this.byId("button5").setVisible(true); // Hacer visible el botón Delete Row
+        } else {
+            oTable.setVisible(false); // Ocultar la tabla
+            this.byId("button3").setVisible(false); // Ocultar botón Add Row
+            this.byId("button4").setVisible(false); // Ocultar botón Save Data
+            this.byId("button5").setVisible(false); // Ocultar botón Delete Row
         }
-      ];
 
-      // Establecer los datos en el modelo
-      var oModel = new JSONModel({
-        items: data
-      });
-
-      // Asociar el modelo con la tabla
-      this.getView().setModel(oModel, "tableData");
-
-      // Hacer visible la tabla
-      var oTable = this.byId("dataTable");
-      oTable.setVisible(true);
+        // Actualiza el valor del código en el modelo
+        var oModel = this.getView().getModel();
+        oModel.setProperty("/formData/cbbPermit", sValue);
     },
 
-    clearTable: function () {
-      // Limpiar los datos de la tabla
-      var oTable = this.byId("dataTable");
-      oTable.setVisible(false);
+    // Evento cuando se presiona el botón "Add Row"
+    onAddRow: function () {
+        var oModel = this.getView().getModel();
+        var oTableData = oModel.getProperty("/tableData");
+
+        // Agregar una nueva fila vacía a la tabla
+        var oNewRow = {
+            permitNo: "",
+            amount: "",
+            approvalDate: ""
+        };
+
+        oTableData.push(oNewRow);
+        oModel.setProperty("/tableData", oTableData);
+    },
+
+    // Evento cuando se presiona el botón "Save Data"
+    onSaveData: function () {
+        var oModel = this.getView().getModel();
+        var aData = oModel.getProperty("/tableData");
+
+        // Lógica para guardar los datos (en este caso, mostramos un mensaje)
+        MessageBox.success("Datos guardados correctamente!");
+        console.log("Datos guardados: ", aData);
+    },
+
+    // Evento cuando se presiona el botón "Delete Selected Row"
+    onDeleteRow: function () {
+        var oTable = this.byId("dataTable");
+        var oSelectedItem = oTable.getSelectedItem();
+
+        if (oSelectedItem) {
+            var oModel = this.getView().getModel();
+            var oData = oModel.getProperty("/tableData");
+            var iIndex = oTable.indexOfItem(oSelectedItem);
+
+            // Eliminar la fila seleccionada
+            oData.splice(iIndex, 1);
+            oModel.setProperty("/tableData", oData);
+
+            // Mostrar un mensaje de éxito
+            MessageBox.success("Fila eliminada correctamente!");
+        } else {
+            MessageBox.warning("Por favor, seleccione una fila para eliminar.");
+        }
+    },
+
+    // Evento cuando se cambia la selección en la tabla
+    onSelectionChange: function (oEvent) {
+        var oSelectedItem = oEvent.getParameter("listItem");
+
+        // Si hay una fila seleccionada, hacer visibles los botones
+        this.byId("button3").setVisible(true); // Botón Add Row
+        this.byId("button4").setVisible(true); // Botón Save Data
+        this.byId("button5").setVisible(true); // Botón Delete Row
+
+        // Lógica adicional si se necesita hacer algo con la fila seleccionada
+        if (oSelectedItem) {
+            // Realizar operaciones con la fila seleccionada si es necesario
+        }
+    },
+
+    _successResponse: function (oData, response) {
+       // Decodificar la cadena Base64
+    var decodedString = atob(oData ? oData.ContentText : '');
+    
+    // Parsear el XML
+    var parser = new DOMParser();
+    var xmlDoc = parser.parseFromString(decodedString, "text/xml");
+    
+    // Recuperar el tag <PO> dentro del tag <PaymentResponse>
+    var poTag = xmlDoc.getElementsByTagName("PaymentResponse")[0].getElementsByTagName("PO")[0];
+    var poContent = poTag ? poTag.textContent : '';
+
+    // Mostrar el mensaje de éxito con el contenido del tag <PO>
+    sap.m.MessageBox.success(this.getView().getModel("i18n").getResourceBundle().getText("saveSuccessMessage",
+      [poContent]), {
+      title: this.getView().getModel("i18n").getResourceBundle().getText("successTitle")
+    }); 
+      
+    },
+   // Evento para abrir el ValueHelpDialog cuando se hace clic en el ícono de ayuda
+   onPurposeValueHelp: function (oEvent) {
+    var sInputValue = oEvent.getSource().getValue(),
+      oView = this.getView();
+
+    if (!this._pPurposeValueHelpDialog) {
+      this._pPurposeValueHelpDialog = Fragment.load({
+        id: oView.getId(),
+        name: "zbsp.bz.zbspcreatetransfer.view.PurposeValueHelpDialog",
+        controller: this
+      }).then(function (oDialog) {
+        oView.addDependent(oDialog);
+        return oDialog;
+      });
     }
-	});
+    this._pPurposeValueHelpDialog.then(function(oDialog) {
+      // Create a filter for the binding
+     
+    var oFilter = new Filter("CodeName", FilterOperator.Contains, sInputValue);
+    var oFilter2 = new Filter("Code", FilterOperator.Contains, sInputValue);
+
+    var oFilterFinal = new sap.ui.model.Filter({
+      filters: [oFilter, oFilter2],
+      and: false  // Establece que el filtro sea OR, no AND
+  });
+
+
+    oDialog.getBinding("items").filter([oFilterFinal]);
+      // Open ValueHelpDialog filtered by the input's value
+      oDialog.open(sInputValue);
+    });
+  },
+  onPurposeValueHelpSearch: function (oEvent) {
+    var sValue = oEvent.getParameter("value");
+    var oFilter = new Filter("CodeName", FilterOperator.Contains, sValue);
+    var oFilter2 = new Filter("Code", FilterOperator.Contains, sValue);
+
+    var oFilterFinal = new sap.ui.model.Filter({
+      filters: [oFilter, oFilter2],
+      and: false  // Establece que el filtro sea OR, no AND
+  });
+
+
+    oEvent.getSource().getBinding("items").filter([oFilterFinal]);
+
+
+  },
+
+    
+});
 });

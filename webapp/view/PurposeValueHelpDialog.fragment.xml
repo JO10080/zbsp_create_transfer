@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="selectDialog"
+		title="Purpose"
+		items="{externalCode>/ZC_ExternalCodes}"
+		search=".onPurposeValueHelpSearch"
+		confirm=".onPurposeValueHelpClose"
+		cancel=".onPurposeValueHelpClose">
+		<StandardListItem 
+            id="selectDialogItem"
+			title="{externalCode>Code}"
+			description="{externalCode>CodeName}" />
+	</SelectDialog>
+</core:FragmentDefinition>

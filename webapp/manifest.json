@@ -33,6 +33,15 @@
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
+      },
+      "externalCode": {
+        "uri": "/sap/opu/odata/sap/ZC_EXTERNALCODES_CDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
       }
     }
   },
@@ -81,6 +90,13 @@
       },
       "createPayment":{
         "dataSource": "createPayment",
+        "preload": true,
+        "settings": {
+          "sap-documentation": "heading"
+        }
+      },
+      "externalCode":{
+        "dataSource": "externalCode",
         "preload": true,
         "settings": {
           "sap-documentation": "heading"
